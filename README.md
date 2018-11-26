@@ -1,6 +1,9 @@
 # image_compare
 comparaison d'image raster avec openlayers4
 
+REDACTION EN COURS
+WRITING IN PROGRESS
+
 The project is composed of 
 - a main HTML file for the interface
 - a javascript file with the code
