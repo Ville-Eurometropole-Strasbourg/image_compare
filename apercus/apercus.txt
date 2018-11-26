@@ -1,0 +1,6 @@
+apercus centrés sur la place Kleber (fichier shp) avec une échelle de 1:3300
+taille de l'image 280x180 pixels en 96 bits
+
+sauf :
+Cassini : echelle 22300
+1750 & Etat Major & 1760 : echelle 12300
