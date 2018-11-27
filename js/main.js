@@ -1,52 +1,14 @@
 var FS = FS || {}; //utilise l'objet FS s'il existe ou (||) créé un nouvel objet {}
 
 FS.main = {
-	//init : function (tabdata) {
-		init : function () {
+	init : function (tabdata) {
+			console.log('init');
 /**--------------------------------------------------------------
 	Défintion des données à afficher et mise en place 
 ----------------------------------------------------------------*/	
 
 		// récupération de la variable générale contenant les données et affectation à la variable interne
-		//FS.main.donnees = tabdata;
-		FS.main.donnees =[
-			['EMS_Carte_historique_Strasbourg_1750','1750 - Carte','https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_historique_Strasbourg_1750',''],
-			['EMS_Carte_historique_Cassini_1760','1760 - Carte de Cassini','https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_historique_Cassini_1760',''],
-			['EMS_Cadastre_napoleonien_1840','1840 - Cadastre napoléonien','https://www.geograndest.fr/geoserver/ems/wms','EMS_Cadastre_napoleonien_1840',''],
-			['EMS_Carte_historique_Etat_Major_1866',"1866 - Carte d'Etat Major",'https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_historique_Etat_Major_1866',''],
-			['EMS_Cadastre_allemand_1895','1895 - Cadastre allemand','https://www.geograndest.fr/geoserver/ems/wms','EMS_Cadastre_allemand_1895',''],
-			['Ortho_1932','1932 - Photographie aérienne noir & blanc','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_1932',''],
-			['EMS_Carte_Strasbourg_1942','1942 - Plan de ville','https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_Strasbourg_1942',''],	
-			['EMS_Carte_Strasbourg_1944','1944 - Plan de ville','https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_Strasbourg_1944',''],
-			['Ortho_1950','1950 - Photographie aérienne noir & blanc','cigal','CIGAL_ORTHO_HISTO_1950_51_ALS_TIF_CC48','https://www.cigalsace.org/geonetwork/apps/georchestra/?uuid=FR-236700019-IGNF_BDORTHOHistor50-51_1-0-CIGAL'],
-			['Ortho_1956','1956 - Photographie aérienne noir & blanc','cigal','CIGAL_ORTHO_HISTO_1956_ALS_TIF_CC48','https://www.cigalsace.org/geonetwork/apps/georchestra/?uuid=FR-236700019-IGNF_BDORTHOHistor56_1-0-CIGAL'],
-			['EMS_Carte_Strasbourg_1962','1962 - Plan de ville','https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_Strasbourg_1962',''],
-			['Ortho_1964','1964 - Photographie aérienne noir & blanc','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_1964',''],
-			['EMS_Carte_Strasbourg_1967','1967 - Plan de ville','https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_Strasbourg_1967',''],
-			['EMS_Carte_Strasbourg_1973','1973 - Plan de ville','https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_Strasbourg_1973',''],
-			['EMS_Carte_Strasbourg_1975','1975 - Plan de ville','https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_Strasbourg_1975',''],
-			['Ortho_1978','1978 - Photographie aérienne noir & blanc','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_1978',''],
-			['Ortho_1986','1986 - Photographie aérienne noir & blanc','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_1986',''],
-			['Ortho_1990','1990 - Photographie aérienne noir & blanc','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_1990',''],
-			['EMS_Carte_Strasbourg_1991','1991 - Plan de ville','https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_Strasbourg_1991',''],
-			['Ortho_1992','1992 - Photographie aérienne couleur','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_1992',''],
-			['EMS_Carte_Strasbourg_1997','1997 - Plan de ville','https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_Strasbourg_1997',''],
-			['Ortho_1998','1998 - Photographie aérienne couleur','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_1998',''],
-			['Ortho_2001','2001 - Photographie aérienne couleur','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_2001',''],			
-			['Ortho_2002','2002 - Photographie aérienne couleur','cigal','CIGAL_ORTHORVB_2002_ALSACE_TIFA_CC48','https://www.cigalsace.org/geonetwork/apps/georchestra/?uuid=FR-236700019-ORTHO-RVB-2002-CIGAL'],
-			['Ortho_2004','2004 - Photographie aérienne couleur','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_2004',''],
-			['Ortho_2007','2007 - Photographie aérienne couleur','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_2007',''],
-			['Ortho_2010','2010 - Photographie aérienne couleur','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_2010',''],
-			['EMS_Carte_Strasbourg_2010','2010 - Plan de ville','https://www.geograndest.fr/geoserver/ems/wms','EMS_Carte_Strasbourg_2010',''],		
-			['Ortho_2011','2011 - Photographie aérienne couleur','cigal','CIGAL_ORTHORVB_2011_12_ALS_TIF_CC48','https://www.cigalsace.org/geonetwork/apps/georchestra/?uuid=FR-236700019-ORTHO-RVB-20112012-CIGAL'],		
-			['Ortho_2013','2013 - Photographie aérienne couleur','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_2013',''],
-			['Ortho_2015','2015 - Photographie aérienne couleur','cigal','CIGAL_ORTHORVB_2015_ALSACE_TIF_L93','https://www.cigalsace.org/geonetwork/apps/georchestra/?uuid=FR-180067019_IGNF_ORTHOHR_RVB_CIGAL_2015'],	
-			['Ortho_2017','2017 - Photographie couleur - périmètre sauvegardé de Strasbourg','https://www.geograndest.fr/geoserver/ems/wms','EMS_Ortho_2017',''],
-			['Fond_carte_EmS','Actuel - Carte','XYZ','http://wgs-users.s3.amazonaws.com/cus/fonds/ems_gris/{z}/{x}/{y}.png','http://www.sig.strasbourg.eu/metadonnees/cswreader/last/index.html?config=config%2Fconfig.json&lang=undefined&view=view&csw=http:%2F%2Fwww.sig.strasbourg.eu%2Fmetadonnees%2Fcswserver%2Flast%2Fcsw%2Fressources.php%3FVERSION%3D2.0.2&csw_list=config%2Fcsw_url.json&md=fr_strasbourg.eu_2013_07_03_64&oldView=grid&header=1&footer=1&constraint_type=Abstract&constraint=topo'],	
-			['Cadastre','Actuel - Plan cadastral','https://www.geograndest.fr/geoserver/ems/wms','EMS_plan_cadastral','http://www.sig.strasbourg.eu/metadonnees/cswreader/last/index.html?config=config%2Fconfig.json&lang=undefined&view=view&csw=http:%2F%2Fwww.sig.strasbourg.eu%2Fmetadonnees%2Fcswserver%2Flast%2Fcsw%2Fressources.php%3FVERSION%3D2.0.2&csw_list=config%2Fcsw_url.json&md=fr_strasbourg.eu_2018_03_08_3&oldView=grid&header=1&footer=1&constraint_type=Abstract&constraint=cadastre'],	
-			['image1','2'],
-			['image2','14']		
-		];
+		FS.main.donnees = tabdata;
 
 		for(var i in FS.main.donnees) {
 			if (FS.main.donnees[i][0] != 'image1' && FS.main.donnees[i][0] != 'image2') {
@@ -1603,8 +1565,7 @@ FS.main = {
 
 $(function() { //function permet de lancer le contenu lorsque la page est chargée
 	// récupération des données dans le fichier donnees.json situé au même niveau que le fichier html
-	/*$.getJSON("donnees.json", function(data) {
+	$.getJSON("donnees.json", function(data) {
 		FS.main.init(data);
-	});*/
-	FS.main.init();
+	});
 });
