@@ -1225,7 +1225,7 @@ FS.main = {
 		var isIE = /*@cc_on!@*/false || !!document.documentMode;
 		// Edge 20+
 		var isEdge = !isIE && !!window.StyleMedia;
-		// Chrome 1+
+		// Chrome 1-71
 		var isChrome = !!window.chrome && !!window.chrome.webstore;
 		
 		if (isOpera) {
@@ -1240,6 +1240,7 @@ FS.main = {
 		if (isEdge) {
 			return window.innerHeight-106;
 		};
+		return window.innerHeight-106;						
 	},
 		
 	chercheAdresse: function (e) {
