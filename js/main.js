@@ -1,3 +1,5 @@
+//image_compare version 1.2
+
 var FS = FS || {}; //utilise l'objet FS s'il existe ou (||) créé un nouvel objet {}
 
 FS.main = {
@@ -440,6 +442,41 @@ FS.main = {
 			var lien = FS.main.Metadonnes($('#ImageGauche').val());
 			window.open(lien);		
 		});
+		$('#btnLG').on('click', function(e) {
+			var nom_couche_WMS;
+			var URL_couche_WMS;
+			var titre_couche_WMS;
+			for(var i in FS.main.donnees) {
+				if (FS.main.donnees[i][0] == $('#ImageGauche').val()) {
+					nom_couche_WMS= FS.main.donnees[i][3];
+					URL_couche_WMS= FS.main.donnees[i][2];
+					titre_couche_WMS= FS.main.donnees[i][1];
+				} 
+			};
+
+			Limg = URL_couche_WMS+"?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER="+nom_couche_WMS+"&LEGEND_OPTIONS=fontColor:0x505050;fontAntiAliasing:true";
+			var hauteur = FS.main.HauteurCarte()-150;
+			var LegendWindow = window.open("", "_blank", "width=450,height="+hauteur+",menubar=0,status=0,titlebar=0,toolbar=0");
+			LegendWindow.document.write("<html><head><title>Légende</title></head><span style='font-family:arial;color:#31455d;font-size:160%;'>Légende</span><p style='font-family:arial;color:#505050;'>"+titre_couche_WMS+"</p><img src="+Limg+">");	
+		});
+
+		$('#btnLD').on('click', function(e) {
+			var nom_couche_WMS;
+			var URL_couche_WMS;
+			var titre_couche_WMS;
+			for(var i in FS.main.donnees) {
+				if (FS.main.donnees[i][0] == $('#ImageDroite').val()) {
+					nom_couche_WMS= FS.main.donnees[i][3];
+					URL_couche_WMS= FS.main.donnees[i][2];
+					titre_couche_WMS= FS.main.donnees[i][1];
+				} 
+			};
+
+			Dimg = URL_couche_WMS+"?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER="+nom_couche_WMS+"&LEGEND_OPTIONS=fontColor:0x505050;fontAntiAliasing:true";
+			var hauteur = FS.main.HauteurCarte()-150;
+			var LegendWindow = window.open("", "_blank", "width=450,height="+hauteur+",menubar=0,status=0,titlebar=0,toolbar=0");
+			LegendWindow.document.write("<html><head><title>Légende</title></head><span style='font-family:arial;color:#31455d;font-size:160%;'>Légende</span><p style='font-family:arial;color:#505050;'>"+titre_couche_WMS+"</p><img src="+Dimg+">");	
+		});									   
 		
 		$('#btnID').on('click', function(e) {
 			var lien = FS.main.Metadonnes($('#ImageDroite').val());
@@ -1365,7 +1402,27 @@ FS.main = {
 		// Changer l'opacité des couches si ce mode est actif
 		if (FS.main.CompareSuperpose == 'oui') {
 			FS.main.ChoixOpacite();					
-		}
+		};
+		
+		// Affiche le bouton de légende si activé dans le fichier JSON
+		for(var i in FS.main.donnees) {
+			if (FS.main.donnees[i][5] == '1' && FS.main.donnees[i][0] == choixImageGauche) {
+				$('#btnLG').show(400);
+				break;
+			} else if (FS.main.donnees[i][5] != '1' && FS.main.donnees[i][0] == choixImageGauche) {
+				$('#btnLG').hide(400);
+				console.log("hide")
+			}
+		};
+		for(var i in FS.main.donnees) {
+			var choixImageDroite = choixImageDroite.replace('_BIS','');
+			if (FS.main.donnees[i][5] == '1' && FS.main.donnees[i][0] == choixImageDroite) {
+				$('#btnLD').show(400);
+				break;
+			} else if (FS.main.donnees[i][5] != '1' && FS.main.donnees[i][0] == choixImageDroite){
+				$('#btnLD').hide(400);
+			}
+		};
 
 	},
 

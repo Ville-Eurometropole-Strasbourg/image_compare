@@ -1,3 +1,5 @@
+/*image_compare v1.2*/
+
 /* Style de la page */
 body, html {
 	margin: 0;
@@ -100,19 +102,24 @@ a:visited {
 	width: 100%;
 }
 
+.i {
+	float: left;	
+}			 
 .btnI {
 	cursor: pointer;
 	margin-left: 35px;
 	margin-top: 8px;
 }
-.i {
-	float: left;
-}
-
 .btnI:hover {
 	cursor: pointer;
 	background: #46cfc0;
 	box-shadow: 2px 2px 10px rgba(70,207,192,0.7), -2px -2px 10px rgba(70,207,192,0.7) ;
+}
+
+.btnL {
+	cursor: pointer;
+	margin-left: 5px;
+	margin-top: 8px;
 }
 
 .label_choix {
@@ -125,6 +132,12 @@ a:visited {
 	font-weight: bold;
 }
 
+#btnLG {
+	display : none;
+}
+#btnLD {
+	display : none;
+}
 #avec {
 	width: 60px;
 }
@@ -262,11 +275,13 @@ a:visited {
 #carte1 {
 	float: left;
 	width: calc(100% - 62px);
+	background: #FFFFFF;	 
 }
 
 #carte2 {
 	float: left;
 	width:  0px;
+	background: #FFFFFF;	  
 }
 
 #cursor {
