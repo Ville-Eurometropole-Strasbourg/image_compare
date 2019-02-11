@@ -2,6 +2,12 @@
 Comparaison d'image avec openlayers 4
 Comparison of images with openlayers 4
 
+-------------
+What's new ?
+-------------
+V 1.2 : add the possibility to display a WMS legend (this legend is created server side). A 6th column is addeed to json file to specify if the legend must be displayed for this specific layer.
+
+
 ---------------------------
 Composition of the project:
 ---------------------------
@@ -33,6 +39,7 @@ You then have then to modify the json as follows:
 - 3rd column: URL of the stream*
 - 4th column: name of the layer in the stream*
 - 5th column: URL to metadata of the layer
+- 6th column: "1" if the WMS legend must be displayed (with any other value, the legend won't be displayed)
 
 The last two lines of json files specifies the number of data streams that will be displayed in the left and right images. 
 
