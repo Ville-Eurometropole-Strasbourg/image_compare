@@ -1404,6 +1404,26 @@ FS.main = {
 			FS.main.ChoixOpacite();					
 		};
 		
+		// Affiche le bouton d'info uniquement s'il existe un lien de métadonnées
+		for(var i in FS.main.donnees) {
+			if (FS.main.donnees[i][4].length > 1 && FS.main.donnees[i][0] == choixImageGauche) {
+				$('#btnIG').show(400);
+				break;
+			} else if (FS.main.donnees[i][4].length <= 1 && FS.main.donnees[i][0] == choixImageGauche) {
+				$('#btnIG').hide(400);
+				console.log("hide")
+			}
+		};
+		for(var i in FS.main.donnees) {
+			var choixImageDroite = choixImageDroite.replace('_BIS','');
+			if (FS.main.donnees[i][4].length > 1 && FS.main.donnees[i][0] == choixImageDroite) {
+				$('#btnID').show(400);
+				break;
+			} else if (FS.main.donnees[i][4].length <= 1 && FS.main.donnees[i][0] == choixImageDroite){
+				$('#btnID').hide(400);
+			}
+		};
+		
 		// Affiche le bouton de légende si activé dans le fichier JSON
 		for(var i in FS.main.donnees) {
 			if (FS.main.donnees[i][5] == '1' && FS.main.donnees[i][0] == choixImageGauche) {
