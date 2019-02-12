@@ -1406,20 +1406,19 @@ FS.main = {
 		
 		// Affiche le bouton d'info uniquement s'il existe un lien de métadonnées
 		for(var i in FS.main.donnees) {
-			if (FS.main.donnees[i][4].length > 1 && FS.main.donnees[i][0] == choixImageGauche) {
+			if (String(FS.main.donnees[i][4]).length > 1 && FS.main.donnees[i][0] == choixImageGauche) {
 				$('#btnIG').show(400);
 				break;
-			} else if (FS.main.donnees[i][4].length <= 1 && FS.main.donnees[i][0] == choixImageGauche) {
+			} else if (String(FS.main.donnees[i][4]).length <= 1 && FS.main.donnees[i][0] == choixImageGauche) {
 				$('#btnIG').hide(400);
-				console.log("hide")
 			}
 		};
 		for(var i in FS.main.donnees) {
 			var choixImageDroite = choixImageDroite.replace('_BIS','');
-			if (FS.main.donnees[i][4].length > 1 && FS.main.donnees[i][0] == choixImageDroite) {
+			if (String(FS.main.donnees[i][4]).length > 1 && FS.main.donnees[i][0] == choixImageDroite) {
 				$('#btnID').show(400);
 				break;
-			} else if (FS.main.donnees[i][4].length <= 1 && FS.main.donnees[i][0] == choixImageDroite){
+			} else if (String(FS.main.donnees[i][4]).length <= 1 && FS.main.donnees[i][0] == choixImageDroite){
 				$('#btnID').hide(400);
 			}
 		};
@@ -1431,7 +1430,6 @@ FS.main = {
 				break;
 			} else if (FS.main.donnees[i][5] != '1' && FS.main.donnees[i][0] == choixImageGauche) {
 				$('#btnLG').hide(400);
-				console.log("hide")
 			}
 		};
 		for(var i in FS.main.donnees) {
