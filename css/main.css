@@ -121,11 +121,11 @@ a:visited {
 #btnID {
 	display : none;
 }
-
-.btnL {
-	cursor: pointer;
-	margin-left: 5px;
-	margin-top: 8px;
+#btnLG {
+	display : none;
+}
+#btnLD {
+	display : none;
 }
 
 .label_choix {
@@ -138,12 +138,6 @@ a:visited {
 	font-weight: bold;
 }
 
-#btnLG {
-	display : none;
-}
-#btnLD {
-	display : none;
-}
 #avec {
 	width: 60px;
 }
@@ -194,7 +188,7 @@ a:visited {
 	float: left;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	width: 220px;
+	width: 230px;
 }
 
 .custom-combobox {

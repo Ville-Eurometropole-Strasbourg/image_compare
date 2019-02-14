@@ -456,7 +456,7 @@ FS.main = {
 
 			Limg = URL_couche_WMS+"?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER="+nom_couche_WMS+"&LEGEND_OPTIONS=fontColor:0x505050;fontAntiAliasing:true";
 			var hauteur = FS.main.HauteurCarte()-150;
-			var LegendWindow = window.open("", "_blank", "width=450,height="+hauteur+",menubar=0,status=0,titlebar=0,toolbar=0");
+			var LegendWindow = window.open("", "_blank", "width=500,height="+hauteur+",menubar=0,status=0,titlebar=0,toolbar=0");
 			LegendWindow.document.write("<html><head><title>Légende</title></head><span style='font-family:arial;color:#31455d;font-size:160%;'>Légende</span><p style='font-family:arial;color:#505050;'>"+titre_couche_WMS+"</p><img src="+Limg+">");	
 		});
 
@@ -474,7 +474,7 @@ FS.main = {
 
 			Dimg = URL_couche_WMS+"?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER="+nom_couche_WMS+"&LEGEND_OPTIONS=fontColor:0x505050;fontAntiAliasing:true";
 			var hauteur = FS.main.HauteurCarte()-150;
-			var LegendWindow = window.open("", "_blank", "width=450,height="+hauteur+",menubar=0,status=0,titlebar=0,toolbar=0");
+			var LegendWindow = window.open("", "_blank", "width=500,height="+hauteur+",menubar=0,status=0,titlebar=0,toolbar=0");
 			LegendWindow.document.write("<html><head><title>Légende</title></head><span style='font-family:arial;color:#31455d;font-size:160%;'>Légende</span><p style='font-family:arial;color:#505050;'>"+titre_couche_WMS+"</p><img src="+Dimg+">");	
 		});									   
 		
