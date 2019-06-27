@@ -47,9 +47,9 @@ FS.main = {
 		var couches = [];
 
 		for(var i in FS.main.donnees) {
-			if (FS.main.donnees[i][1] == 'XYZ') {
+			if (FS.main.donnees[i][2] == 'XYZ') {
 				source[i] = new ol.source.XYZ({
-					url: FS.main.donnees[i][2],
+					url: FS.main.donnees[i][3],
 					//crossOrigin: 'anonymous'
 				});					
 			} else {
