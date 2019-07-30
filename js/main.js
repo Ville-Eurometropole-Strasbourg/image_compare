@@ -3,14 +3,15 @@
 var FS = FS || {}; //utilise l'objet FS s'il existe ou (||) créé un nouvel objet {}
 
 FS.main = {
-	init : function (tabdata) {
+	init : function (tabdata,langageData) {
 			console.log('init');
 /**--------------------------------------------------------------
 	Défintion des données à afficher et mise en place 
 ----------------------------------------------------------------*/	
 
-		// récupération de la variable générale contenant les données et affectation à la variable interne
+		// récupération des variables générales contenant les données et les traductions et affectation aux variables internes
 		FS.main.donnees = tabdata;
+		FS.main.langage = langageData;
 
 		for(var i in FS.main.donnees) {
 			if (FS.main.donnees[i][0] != 'image1' && FS.main.donnees[i][0] != 'image2') {
@@ -120,7 +121,7 @@ FS.main = {
 		FS.main.vue = new ol.View({ // création de la vue, par défaut en Mercator
 			center: ol.proj.fromLonLat([7.75,48.58]), // transformation des coordonnées en degrés vers Mercator 
 			zoom: 14, // niveau de zoom
-			extent: [848000,6180500,880000,6221800], // étandue maximale du centre de la carte
+			extent: [848000,6180500,880000,6221800], // étendue maximale du centre de la carte
 			minZoom : 11,
 			maxZoom : 21
 		});
@@ -1609,8 +1610,31 @@ FS.main = {
 };
 
 $(function() { //function permet de lancer le contenu lorsque la page est chargée
-	// récupération des données dans le fichier donnees.json situé au même niveau que le fichier html
-	$.getJSON("donnees.json", function(data) {
-		FS.main.init(data);
+	// récupération des données dans les fichiers donnees.json situés au même niveau que le fichier html
+	var StreamsData, languageData;
+	console.log("test")
+	$.when(
+		$.getJSON("donnees.json", function(data) {
+			StreamsData = data;
+		}),
+		$.getJSON("langage.json", function(data) {
+			languageData = data;
+		})
+	).then(function() {
+		console.log("languageData");
+		if (StreamsData && languageData) {
+			FS.main.init(StreamsData,languageData);
+			console.log(languageData);
+		}
+		else {
+			console.log("Erreur de chargement / loading error")
+		}
+
 	});
+	
+	
+	
+	/*$.getJSON("donnees.json", function(data) {
+		FS.main.init(data);
+	});*/
 });
