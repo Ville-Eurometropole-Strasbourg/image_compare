@@ -39,11 +39,11 @@ You then have then to modify the json as follows:
 - 3rd column: URL of the stream*
 - 4th column: name of the layer in the stream*
 - 5th column: URL to metadata of the layer
-- 6th column: "1" if the WMS legend must be displayed (with any other value, the legend won't be displayed)
+- 6th column (optionnal): "1" if the WMS legend must be displayed (with any other value, the legend won't be displayed)
 
-The last two lines of json files specifies the number of data streams that will be displayed in the left and right images. 
+The last two lines of json files specifies the id of data streams that will be displayed in the left and right images. 
 
-The overviews of the raster layers have to be stored in the 'img' folder.
+The overviews of the raster layers have to be stored in the 'img' folder with the same name as column 1.
 
 * the mechanism is different for XYZ data streams : 3rd column is equal to 'XYZ' and 4th column contains the URL
 
@@ -63,15 +63,15 @@ Three comparison mode are available:
 
 The two last modes can be used simulteneously.
 
-JS functions : Cote, Superpose, Switch, 
+JS functions : Cote (side by side), Superpose (surimposed map), Switch 
 
 Search
 ------
 
 Allow the user to search for an adress in Strasbourg metropole.
 The JS code use a Strasbourg specific search engine (Adict) based on a URL request. This search engine is based on the addok project (https://github.com/addok/addok)
-In France tha API on this website can also be used: https://adresse.data.gouv.fr/api (same search engine code)
---> This tool need to be set on another search engine to work outise Strasbourg metropole area.
+In France the API on this website can also be used: https://adresse.data.gouv.fr/api (same search engine code)
+--> This tool need to be set on another search engine to work outside Strasbourg metropole area.
 
 JS functions : chercheAdresse & zoomAdresse
 
