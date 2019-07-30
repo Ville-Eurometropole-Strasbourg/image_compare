@@ -122,7 +122,7 @@ FS.main = {
 			zoom: 14, // niveau de zoom
 			extent: [848000,6180500,880000,6221800], // étandue maximale du centre de la carte
 			minZoom : 11,
-			maxZoom : 20
+			maxZoom : 21
 		});
 		
 		var scaleLine = new ol.control.ScaleLine();
@@ -225,14 +225,12 @@ FS.main = {
 			}
 			window.resizeMapUpdateTimer= setTimeout(function () {
 			var hauteur = FS.main.HauteurCarte();
-			//console.log('height '+hauteur );
 			$("#carte1").css("height", hauteur);
 			$("#carte2").css("height", hauteur);
 			$("#toolbar").css("height", hauteur);
 			FS.main.map1.updateSize();
 			FS.main.map2.updateSize();
 			var offset = $("#contenu").offset()
-			//console.log('offset '+offset.top)
 			$("#chercheAdresse").css('top', offset.top+17);
 			$("#croix").css('top', offset.top+17);
 			$("#listeAdresses").css('top', offset.top+52);			
@@ -415,7 +413,6 @@ FS.main = {
 				/*if (indexG == $("#ImageDroite").prop('selectedIndex')) {
 					if ($("#ImageDroite").prop('selectedIndex') == $("#ImageDroite option").length-1) {
 						$('#ImageDroite option')[0].selected = true;
-						console.log(custom.combobox.input.value())
 					} else {
 						$('#ImageDroite option')[indexG+1].selected = true;
 					}
@@ -646,9 +643,7 @@ FS.main = {
 		if (FS.main.CompareCote != 'oui') { // mise en place de l'interface de cette méthode
 			btnCote.style.background = '#fbaf17';		
 			$('#croix').css("visibility","visible");
-			console.log($(document).width())
 			var moitie = ($(document).width() - 62)/2
-			console.log('cote');
 			$( "#carte1" ).animate({width: moitie},800, function() {
 				FS.main.map1.updateSize();
 			});
@@ -688,9 +683,7 @@ FS.main = {
 		}
 		function updateCursor(e, offset){
 			// the 16 is here to position to the center of the cursor icon in, not the top left of the cursor image		
-			//console.log(e.clientY);
 			if (e.clientY >=  window.innerHeight-16) {
-				//console.log('toto');
 				e.clientY = window.innerHeight-16;
 			}			
 			var cursor_top = e.clientY-16+'px';
@@ -823,7 +816,6 @@ FS.main = {
 	Coordonnees: function () {
 
 		if (FS.main.ModeCoord != 'actif') {  // mettre en place l'interface de cet outil
-			console.log('false');
 			btnCoordonnees.style.background = '#fbaf17';
 			$('#zoneCoordonnees').show(800);
 			
@@ -958,7 +950,6 @@ FS.main = {
 		var carte1 = 0;
 		var carte2 = 0;
 		
-		console.log('avant '+size1);
 
 		var width = 1594;
 		if (FS.main.CompareCote == 'oui') {
@@ -994,12 +985,10 @@ FS.main = {
 		enregistrement des cartes aux bonnes dimensions après chargement des dalles
 		-------------------------------------*/
 		var tileLoadStart1 = function() {
-			//console.log('loading1')
 			++loading1;
 		};
 		
 		var tileLoadStart2 = function() {
-			//console.log('loading2')
 			++loading2;
 		};
 
@@ -1011,14 +1000,12 @@ FS.main = {
 			    loading1 = 0;
 			    loaded1 = 0;
 			    var data = canvas.toDataURL('image/png');
-			    console.log('image1');
 				if (FS.main.CompareCote != 'oui') {
 					pdf.addImage(data, 'JPEG', 12, 42, 270, 149);
 				} else {
 					pdf.addImage(data, 'JPEG', 12, 42, 135, 149);
 				}
 				carte1 = 1;
-				console.log('carte1 '+carte1);
 			    GenerePDF();
 			    source1.un('tileloadstart', tileLoadStart1);
 			    source1.un('tileloadend', tileLoadEnd1, canvas);
@@ -1035,12 +1022,10 @@ FS.main = {
 			    loading2 = 0;
 			    loaded2 = 0;
 			    var data = canvas.toDataURL('image/png');
-			    //console.log(FS.main.CompareCote);
 			  	if (FS.main.CompareCote == 'oui') {
 					pdf.addImage(data, 'JPEG', 147, 42, 135, 149);
 				}
 				carte2 = 1;
-				console.log('carte2 '+carte2);
 				GenerePDF();
 			    source2.un('tileloadstart', tileLoadStart2);
 			    source2.un('tileloadend', tileLoadEnd2, canvas);
@@ -1052,20 +1037,17 @@ FS.main = {
 		
 		if (FS.main.CompareCote == 'oui') {
 			FS.main.map1.once('postcompose', function(event) {
-				//console.log('loading1 started');
 				source1.on('tileloadstart', tileLoadStart1);
 				source1.on('tileloadend', tileLoadEnd1, event.context.canvas);
 				source1.on('tileloaderror', tileLoadEnd1, event.context.canvas);
 			});
 			FS.main.map2.once('postcompose', function(event) {
-				//console.log('loading2 started');
 				source2.on('tileloadstart', tileLoadStart2);
 				source2.on('tileloadend', tileLoadEnd2, event.context.canvas);
 				source2.on('tileloaderror', tileLoadEnd2, event.context.canvas);
 			});
 		} else {
 			FS.main.map1.once('postcompose', function(event) {
-				//console.log('loading2 started');
 				source1.on('tileloadstart', tileLoadStart1);
 				source1.on('tileloadend', tileLoadEnd1, event.context.canvas);
 				source1.on('tileloaderror', tileLoadEnd1, event.context.canvas);
@@ -1075,7 +1057,6 @@ FS.main = {
 			});
 		}
 	
-		console.log('pendant '+width+'*'+height);
 		FS.main.map1.setSize([width, height]);
 		FS.main.map1.getView().fit(extent1, {nearest: true});
 		FS.main.map1.renderSync();
@@ -1091,13 +1072,11 @@ FS.main = {
 		
 		function GenerePDF () { // génération du PDF
 			
-			//console.log('carte1 '+carte1+' - carte2 '+carte2);
 			if (carte1==1 && carte2==1 && FS.main.Impression == 'on') {
 				carte1=0;
 				carte2=0;
 				FS.main.Impression = 'off';
 				window.setTimeout(function() {
-				console.log('apres'+size1)
 			    FS.main.map1.setSize(size1);
 			    FS.main.map1.getView().fit(extent1, {nearest: true});
 			    FS.main.map1.renderSync();
@@ -1109,16 +1088,6 @@ FS.main = {
 					pdf.save('Strasbourg au fil du temps.pdf');
 					document.body.style.cursor = 'auto';
 					$("#imprimerPatientez").css("visibility","hidden");					
-		//source1.set('transition', 'default');
-        //source2.set('transition', 'default')
-					/*$("#ProgressG.element.style").css({
-						"visibility": 'hidden',
-						"width":"0",
-					});
-					$("#ProgressD").css({
-						"visibility": 'hidden',
-						"width":"0",
-					});*/
 			}, 3500);
 			}
 			
