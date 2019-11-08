@@ -1429,7 +1429,7 @@ FS.main = {
 		pdf.setFontSize(9);
 		pdf.text(12, 198, FS.main.langage[32][FS.main.langue]);
 		pdf.setTextColor(70,207,192);
-		pdf.textWithLink('www.sig-strasbourg.eu', 170, 198, { url: 'http://www.sig.strasbourg.eu' });
+		pdf.textWithLink('www.sig-strasbourg.eu', 170, 198, { url: 'https://www.sig.strasbourg.eu' });
 		pdf.line(170,199,203,199);
 		pdf.setTextColor(0);
 		pdf.text(225, 198, FS.main.langage[33][FS.main.langue]);
@@ -1779,7 +1779,7 @@ FS.main = {
 		
 	chercheAdresse: function (e) {
 		var adresse = $('#adresse').val();
-		var url = 'http://adict.strasbourg.eu/addok/search?q=' + adresse;
+		var url = 'https://adict.strasbourg.eu/addok/search?q=' + adresse;
 		
 		if(adresse.length>2) {
 			$("#annul_adresse").show(0);
