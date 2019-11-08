@@ -6,6 +6,7 @@ Comparison of images with openlayers 4
 What's new ?
 -------------
 V 1.2: add the possibility to display a WMS legend (this legend is created server side). A 6th column is addeed to json file to specify if the legend must be displayed for this specific layer.
+
 V 1.3: add multilingual support, display of attributions text and logo, possibility to retrieve attributions and metadata directly from WMS stream, new permalink tool
 
 
