@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- image_compare v1.3 -->
+<!-- image_compare v1.4 -->
 <html>
 
 	<head>
@@ -7,42 +7,47 @@
 		<script src="./librairie/jquery/jquery-3.2.1.min.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script src="./librairie/OL/ol.js"></script>
+		<!--<script src="./librairie/v6.2.1-dist/ol.js"></script>-->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
+		<script src="js/Fonction.js"></script>		
+		<script src="js/IHM.js"></script>	
 		<script src="js/main.js"></script>
 		
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" href="./librairie/OL/ol.css"></link>
 		<link rel="stylesheet" href="css/main.css"></link>
+
+		<meta name="viewport" content="width=device-width, user-scalable=no">
 	</head>
 
 	<body>
 		<table id="tableGen" cellspacing="0" cellpadding="0" >
 		<tr><td id="titre" style="height: 36px; border-spacing:0px; ">
-			<div id="logo"><a target="_blank" href="https://www.strasbourg.eu"><img src="img/logo_EMS_32.png" alt="logo"/></a></div>
+			<div id="logo"><a target="_blank" href="http://www.strasbourg.eu"><img src="img/logo_EMS_32.png" draggable="false" alt="logo"/></a></div>
 			<div id="label_titre">Strasbourg au fil du temps...</div>
 			<div class="langue" id="L4"></div>
 			<div class="langue" id="L3"></div>
 			<div class="langue" id="L2"></div>
 			<div class="langue" id="L1"></div>
-			<a id='contactEmail' target="_blank" href="mailto:geomatique@strasbourg.eu?&subject=Comparaison d'images historiques">
+			<a class="kiosk" id='contactEmail' target="_blank" href="mailto:geomatique@strasbourg.eu?&subject=Comparaison d'images historiques">
 			<div class="contact" id="contact">
-				<div class="contact"><img src="img/contact.png" alt="contact"/></div>
+				<div class="contact"><img src="img/contact.png" draggable="false" alt="contact"/></div>
 				<div id="contact_text" class="contact">Contact</div>
 			</div>
-		</a>
+			</a>
 		</td></tr>
 		<tr><td id="menuTD"><div id="menu">	
 				<div class="label_choix" id="comparer">Comparer</div>
 				<div class="menuChoix"><select id="ImageGauche"></select></div>
-				<div class="i"><img class="btnI" id="btnIG" src="img/i.png" alt="info gauche"/></div>
-				<div class="i"><img class="btnI" id="btnLG" src="img/legende.png" alt="légende gauche"/></div>																				   
+				<div class="i"><img class="btnI" id="btnIG" src="img/i.png" draggable="false" alt="info gauche"/></div>
+				<div class="i"><img class="btnI" id="btnLG" src="img/legende.png" draggable="false" alt="légende gauche"/></div>																				   
 				<div class="opacite" id="opaciteG"><div class="opaciteTexte"></div><input id="opaciteGauche" type="range" min="0" max="1" step="0.05" value="0.5" class="sliderOpacite">&nbsp;100%</div>
 				<div class="label_choix" id="avec">Avec</div>
 				<div class="menuChoix"><select id="ImageDroite"></select></div>
-				<div class="i"><img class="btnI" id="btnID" src="img/i.png" alt="info droite"/></div>
-				<div class="i"><img class="btnI" id="btnLD" src="img/legende.png" alt="légende droite"/></div>																				   
+				<div class="i"><img class="btnI" id="btnID" src="img/i.png" draggable="false" draggable="false" alt="info droite"/></div>
+				<div class="i"><img class="btnI" id="btnLD" src="img/legende.png" draggable="false" alt="légende droite"/></div>																				   
 				<div class="opacite" id="opaciteD"><div class="opaciteTexte"></div><input id="opaciteDroite" type="range" min="0" max="1" step="0.05" value="1" class="sliderOpacite">&nbsp;100%</div>
 		</div></td></tr>
 		<tr><td id="contenuTD" style="width: 100%; height: 100%;">
@@ -52,7 +57,7 @@
 			<div id="switcher"><input id="swipe" type="range" min="0" max="1" step="0.01" value="0.5" class="switchCompare"></div>
 			<div id="croix"><img id="cursor" src="img/cross.png" alt="X"/></div>		
 			<div id="chercheAdresse"><input id="adresse" type="text" placeholder="Entrez une adresse pour vous localiser"></div>
-			<div id="annul_adresse"><img id="img_croix" src="img/croix.png" alt="vider adresse"/></div>
+			<div id="annul_adresse"><img id="img_croix" src="img/croix.png" draggable="false" alt="vider adresse"/></div>
 			<div id="listeAdresses"></div>
 			<div id="zoneCoordonnees">
 				<div class="txtCoord" id="labelGeo">Latitude / longitude (WGS84) :</div>
@@ -80,43 +85,45 @@
 				</div>			
 			</div>		
 			<div id='tt_avertissement'>Cet outil ne fonctionne que sur la carte de gauche en mode c&ocirc;te &agrave; c&ocirc;te</div>
-			<div id='ie_avertissement'></div>			
+			<div id='ie_avertissement'></div>	
+			<div id="aide_kiosque"></div>			
 			<div id='apercu'></div>
-			<div id="toolbar">		
-				<div class="btnChoix"><a target="_self" href="https://www.sig.strasbourg.eu"><img  class="imgChoix" id="btnMaison" src="img/maison.png" alt="maison"/></a>
+			<div id="toolbar">	
+				<div id="btnAide"><img  class="imgChoix" id="imgbtnAide" src="img/aide.png" draggable="false" alt="aide"/></div>	
+				<div class="btnChoix kiosk"><a target="_self" href="http://www.sig.strasbourg.eu"><img  class="imgChoix" id="btnMaison" src="img/maison.png" draggable="false" alt="maison"/></a>
 					<span class="aide_toolbar" id="tt_Maison">Retour sur le site Internet du service G&eacute;omatique et connaissance du territoire</span>
 				</div>
-				<div class="btnChoix"><a target="_blank" href="https://www.sig.strasbourg.eu/index.php?page=cartotheque"><img  class="imgChoix" id="btnCartes" src="img/map.png" alt="cartes_PDF"/></a>
+				<div class="btnChoix kiosk"><a target="_blank" href="http://www.sig.strasbourg.eu/index.php?page=cartotheque"><img  class="imgChoix" id="btnCartes" src="img/map.png" draggable="false" alt="cartes_PDF"/></a>
 					<span class="aide_toolbar" id="tt_Cartes">Acc&egrave;s direct &agrave; la page de t&eacute;l&eacute;chargement des cartes anciennes en PDF</span>
 				</div>
 				<hr>
-				<div class="btnChoix"><img class="imgChoix" id="btnCote" src="img/cote.png" alt="cote"/>
+				<div class="btnChoix"><img class="imgChoix" id="btnCote" src="img/cote.png" draggable="false" alt="cote"/>
 					<span class="aide_toolbar" id="tt_Cote">Cartes c&ocirc;te &agrave; c&ocirc;te et synchronis&eacute;es. Ce mode est incompatible avec la gestion d'opacit&eacute; et la coulisse de comparaison</span>
 				</div>			
-				<div class="btnChoix"><img class="imgChoix" id="btnSuperpose" src="img/superpose.png" alt="superpose"/>
+				<div class="btnChoix"><img class="imgChoix" id="btnSuperpose" src="img/superpose.png" draggable="false" alt="superpose"/>
 					<span class="aide_toolbar" id="tt_Superpose">Cartes superpose&eacute;s : utilisez les curseurs pour changer les opacit&eacute;s</span>
 				</div>				
-				<div class="btnChoix"><img class="imgChoix" id="btnSwitcher" src="img/switcher.png" alt="switcher"/>
+				<div class="btnChoix"><img class="imgChoix" id="btnSwitcher" src="img/switcher.png" draggable="false" alt="switcher"/>
 					<span class="aide_toolbar" id="tt_Switcher">Utilisez la coulisse pour d&eacute;placer la limite de comparaison</span>
 				</div>
-				<hr>		
-				<div class="btnChoix"><img class="imgChoix" id="btnMesureDistance" src="img/mesure_distance.png" alt="mesurer une distance"/>
+				<hr class="kiosk">		
+				<div class="btnChoix"><img class="imgChoix" id="btnMesureDistance" src="img/mesure_distance.png" draggable="false" alt="mesurer une distance"/>
 					<span class="aide_toolbar" id="tt_Distance">Cliquez pour activer la mesure de distance, cliquez &agrave; nouveau pour d&eacute;sactiver</span>
 				</div>
-				<div class="btnChoix"><img class="imgChoix" id="btnMesureSurface" src="img/mesure_surface.png" alt="mesurer une surface"/>
+				<div class="btnChoix"><img class="imgChoix" id="btnMesureSurface" src="img/mesure_surface.png" draggable="false" alt="mesurer une surface"/>
 					<span class="aide_toolbar" id="tt_Surface">Cliquez pour activer la mesure de superficie, cliquez &agrave; nouveau pour d&eacute;sactiver</span>
 				</div>
-				<div class="btnChoix"><img class="imgChoix" id="btnCoordonnees" src="img/coordonnees.png" alt="coordonnees"/>
+				<div class="btnChoix kiosk"><img class="imgChoix" id="btnCoordonnees" src="img/coordonnees.png" draggable="false" alt="coordonnees"/>
 					<span class="aide_toolbar" id="tt_Coordonnees">Cliquez pour activer l'affichage des coordonn&eacute;es, cliquez &agrave; nouveau pour d&eacute;sactiver</span>
 				</div>
-				<hr>
-				<div class="btnChoix"><img class="imgChoix" id="btnTelecharger" src="img/telecharger.png" alt="telecharger"/>
+				<hr class="kiosk">
+				<div class="btnChoix kiosk"><img class="imgChoix" id="btnTelecharger" src="img/telecharger.png" draggable="false" alt="telecharger"/>
 					<span class="aide_toolbar" id="tt_PNG">T&eacute;l&eacute;charger la (les) carte(s) au format PNG</span>
 				</div>
-				<div class="btnChoix"><img class="imgChoix" id="btnImprimer" src="img/imprimante.png" alt="imprimer"/>							
+				<div class="btnChoix kiosk"><img class="imgChoix" id="btnImprimer" src="img/imprimante.png" draggable="false" alt="imprimer"/>							
 					<span class="aide_toolbar" id="tt_Imprimer">G&eacute;n&eacute;rer un fichier PDF imprimable</span>
 				</div>
-				<div class="btnChoix"><img class="imgChoix" id="btnPermalien" src="img/permalien.png" alt="permalien"/>							
+				<div class="btnChoix kiosk"><img class="imgChoix" id="btnPermalien" src="img/permalien.png" draggable="false" alt="permalien"/>							
 					<span class="aide_toolbar" id="tt_Permalien">G&eacute;n&eacute;rer un permalien</span>
 				</div>				
 			</div>
