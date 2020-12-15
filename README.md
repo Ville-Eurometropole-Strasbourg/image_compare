@@ -9,6 +9,7 @@ V 1.2: add the possibility to display a WMS legend (this legend is created serve
 
 V 1.3: add multilingual support, display of attributions text and logo, possibility to retrieve attributions and metadata directly from WMS stream, new permalink tool
 
+V 1.4: added a kiosk mode as URL parameter (K=1), the main js file is now separated in 3 files : fonctions.js with all functions, IHM.js deals with interface (interactions personne-machine or IPM), the remaining code is still in main.js
 
 ---------------------------
 Composition of the project:
