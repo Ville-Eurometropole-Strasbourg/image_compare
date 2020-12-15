@@ -1026,7 +1026,7 @@ function LargeurCarte() { // définit les hauteurs de carte en fonction des navi
 		
 function chercheAdresse() {
 	var adresse = $('#adresse').val();
-	var url = 'http://adict.strasbourg.eu/addok/search?q=' + adresse;
+	var url = 'https://adict.strasbourg.eu/addok/search?q=' + adresse;
 	
 	if(adresse.length>2) {
 		$("#annul_adresse").show(0);
