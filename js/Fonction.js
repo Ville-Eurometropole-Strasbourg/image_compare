@@ -115,9 +115,9 @@ function changeLangage(langue,init) { // Mise en place des textes en fonction de
 	$("#tt_PNG").html(FS.main.langage[22][langue]);
 	$("#tt_Imprimer").html(FS.main.langage[23][langue]);
 	if (FS.main.Kiosque == 0) {
-		$("#plateforme").html(FS.main.langage[24][langue]+' <a target="_blank" href="https://www.geograndest.fr/portail/">GeoGrandEst</a> '+FS.main.langage[25][langue]);
+		$("#plateforme").html(FS.main.langage[24][langue]+' <a target="_blank" href="https://www.datagrandest.fr/portail/">DataGrandEst</a> '+FS.main.langage[25][langue]);
 	} else {
-		$("#plateforme").html(FS.main.langage[24][langue]+' GeoGrandEst '+FS.main.langage[25][langue]);
+		$("#plateforme").html(FS.main.langage[24][langue]+' DataGrandEst '+FS.main.langage[25][langue]);
 	}
 	$("#tt_Permalien").html(FS.main.langage[38][FS.main.langue]);
 	$("#titrePermalien").html(FS.main.langage[39][FS.main.langue]);
