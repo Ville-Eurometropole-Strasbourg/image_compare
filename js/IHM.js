@@ -268,7 +268,7 @@ function initControls() {
             if (FS.main.donnees[i][0] == $('#ImageDroite').val()) {
                 nom_couche_WMS= FS.main.donnees[i][2];
                 URL_couche_WMS= FS.main.donnees[i][1];
-                titre_couche_WMS= FS.main.donnees[i][5+langue];
+                titre_couche_WMS= FS.main.donnees[i][5+FS.main.langue];
             } 
         };
 
