@@ -11,7 +11,7 @@ V 1.3: add multilingual support, display of attributions text and logo, possibil
 
 V 1.4: added a kiosk mode as URL parameter (K=1), the main js file is now separated in 3 files : fonctions.js with all functions, IHM.js deals with interface (interactions personne-machine or IPM), the remaining code is still in main.js
 
-V1.5: main parameters are now in a specific JSON file (param.json)and not in the javascript code. Start images and metadata URL are now in this parameter file (they were previously in donnees.json). Coordinates used in URL and permalink are now in geographic system and in decimal degrees (and not in Mercator coodinates anymore). Colors of the different elements are now only defined in the CSS file and no more in the main.js. Start images can be defined either by their order in the donnees.json file or by the internal name of the layer (used now in permalinks). Add a zoom to extent button (button with globe). Bug corrections.
+V1.5: main parameters are now in a specific JSON file (param.json) and not in the javascript code. Start images and metadata URL are now in this parameter file (they were previously in donnees.json). Coordinates used in URL and permalink are now in geographic system and in decimal degrees (and not in Mercator coodinates anymore). Colors of the different elements are now only defined in the CSS file and no more in the main.js. Start images can be defined either by their order in the donnees.json file or by the internal name of the layer (used now in permalinks). Add a zoom to extent button (button with globe). Bug corrections.
 
 ---------------------------
 Composition of the project:
