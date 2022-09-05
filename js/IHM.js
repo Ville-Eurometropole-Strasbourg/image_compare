@@ -1,4 +1,4 @@
-//image_compare version 1.4
+//image_compare version 1.5
 
 /**--------------------------------------------------------------
 	Fonction d'initialisation des évènements
@@ -59,7 +59,6 @@ function initControls() {
         });
     };
 
-
     $.widget( "custom.combobox", {
         _create: function() {
             this.wrapper = $( "<span>" )
@@ -77,7 +76,8 @@ function initControls() {
             var input = this.input;
             input.autocomplete( "widget" ).each(function() {
                 $(this).on('mouseenter', "li", function(){
-                    Combobox_hover(this);
+                         Combobox_hover(this);
+                         console.log('test');
                 });
 
             });
@@ -257,7 +257,7 @@ function initControls() {
         Limg = URL_couche_WMS+"?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER="+nom_couche_WMS+"&LEGEND_OPTIONS=fontColor:0x505050;fontAntiAliasing:true";
         var hauteur = HauteurCarte()-150;
         var LegendWindow = window.open("", "_blank", "width=500,height="+hauteur+",menubar=0,status=0,titlebar=0,toolbar=0");
-        LegendWindow.document.write("<html><head><title>"+FS.main.langage[26][FS.main.langue]+"</title></head><span style='font-family:arial;color:"+background_color+";font-size:160%;'>"+FS.main.langage[26][FS.main.langue]+"</span><p style='font-family:arial;color:#505050;'>"+titre_couche_WMS+"</p><img src="+Limg+">");	
+        LegendWindow.document.write("<html><head><title>"+FS.main.langage[26][FS.main.langue]+"</title></head><span style='font-family:arial;color:"+FS.main.background_color+";font-size:160%;'>"+FS.main.langage[26][FS.main.langue]+"</span><p style='font-family:arial;color:#505050;'>"+titre_couche_WMS+"</p><img src="+Limg+">");	
     });
 
     $('#btnLD').on('click', function(e) {
@@ -275,7 +275,7 @@ function initControls() {
         Dimg = URL_couche_WMS+"?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER="+nom_couche_WMS+"&LEGEND_OPTIONS=fontColor:0x505050;fontAntiAliasing:true";
         var hauteur = HauteurCarte()-150;
         var LegendWindow = window.open("", "_blank", "width=500,height="+hauteur+",menubar=0,status=0,titlebar=0,toolbar=0");
-        LegendWindow.document.write("<html><head><title>"+FS.main.langage[26][FS.main.langue]+"</title></head><span style='font-family:arial;color:"+background_color+";font-size:160%;'>"+FS.main.langage[26][FS.main.langue]+"</span><p style='font-family:arial;color:#505050;'>"+titre_couche_WMS+"</p><img src="+Dimg+">");	
+        LegendWindow.document.write("<html><head><title>"+FS.main.langage[26][FS.main.langue]+"</title></head><span style='font-family:arial;color:"+FS.main.background_color+";font-size:160%;'>"+FS.main.langage[26][FS.main.langue]+"</span><p style='font-family:arial;color:#505050;'>"+titre_couche_WMS+"</p><img src="+Dimg+">");	
     });									   
     
     $('#btnID').on('click', function(e) {
@@ -285,13 +285,13 @@ function initControls() {
     
     $("#imgbtnAide").hover(function(){
         $(this).css({
-            "background-color": highlight_color,
-            "box-shadow":"2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha)"
+            "background-color": "var(--highlight-color)",
+            "box-shadow":"2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1)"
         });
         }, function(){
         if (FS.main.AideKiosque == 1) {
             $(this).css({
-                "background-color": active_color,
+                "background-color": "var(--active-color)",
                 "box-shadow": "none"
             });
         } else {
@@ -308,7 +308,7 @@ function initControls() {
             imgbtnAide.style.background = 'transparent';
             $("#aide_kiosque").css("visibility", "hidden");
         } else {
-            imgbtnAide.style.background = active_color;
+            imgbtnAide.style.background = FS.main.active_color;
             $("#aide_kiosque").css("visibility", "visible");			
             FS.main.AideKiosque = 1
         }
@@ -320,13 +320,13 @@ function initControls() {
     });		
     $("#btnCote").hover(function(){
         $(this).css({
-            "background-color": highlight_color,
-            "box-shadow":"2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha)"
+            "background-color": "var(--highlight-color)",
+            "box-shadow":"2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1)"
         });
         }, function(){
         if (FS.main.CompareCote == 1) {
             $(this).css({
-                "background-color": active_color,
+                "background-color": "var(--active-color)",
                 "box-shadow": "none"
             });
         } else {
@@ -343,13 +343,13 @@ function initControls() {
     });		
     $("#btnSuperpose").hover(function(){
         $(this).css({
-            "background-color": highlight_color,
-            "box-shadow":"2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha)"
+            "background-color": "var(--highlight-color)",
+            "box-shadow":"2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1)"
         });
         }, function(){
         if (FS.main.CompareSuperpose == 1) {
             $(this).css({
-                "background-color": active_color,
+                "background-color": "var(--active-color)",
                 "box-shadow": "none"
             });
         } else {
@@ -366,13 +366,13 @@ function initControls() {
     });			
     $("#btnSwitcher").hover(function(){
         $(this).css({
-            "background-color": highlight_color,
-            "box-shadow":"2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha)"
+            "background-color": "var(--highlight-color)",
+            "box-shadow":"2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1)"
         });
         }, function(){
         if (FS.main.CompareSwitcher == 1) {
             $(this).css({
-                "background-color": active_color,
+                "background-color": "var(--active-color)",
                 "box-shadow": "none"
             });
         } else {
@@ -385,8 +385,8 @@ function initControls() {
     
     $("#btnMesureDistance").hover(function(){
         $(this).css({
-            "background-color": highlight_color,
-            "box-shadow":"2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha)"
+            "background-color": "var(--highlight-color)",
+            "box-shadow":"2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1)"
         });
         if (FS.main.CompareCote == 1) {
             $('#tt_avertissement').css({
@@ -406,7 +406,7 @@ function initControls() {
         });
         if (FS.main.ModeMesure == 'Distance') {
             $(this).css({
-                "background-color": active_color,
+                "background-color": "var(--active-color)",
                 "box-shadow": "none"
             });
         } else {
@@ -427,7 +427,7 @@ function initControls() {
             FS.main.map2.getOverlays().clear();
         } else {
             FS.main.map1.removeInteraction(FS.main.draw);
-            btnMesureDistance.style.background = active_color;
+            btnMesureDistance.style.background = FS.main.active_color;
             btnMesureSurface.style.background = 'transparent';				
             FS.main.ModeMesure = 'Distance'
             Mesure();
@@ -436,8 +436,8 @@ function initControls() {
 
     $("#btnMesureSurface").hover(function(){
         $(this).css({
-            "background-color": highlight_color,
-            "box-shadow":"2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha)"
+            "background-color": "var(--highlight-color)",
+            "box-shadow":"2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1)"
         });
         if (FS.main.CompareCote == 1) {
             $('#tt_avertissement').css({
@@ -457,7 +457,7 @@ function initControls() {
         });
         if (FS.main.ModeMesure == 'Surface') {
             $(this).css({
-                "background-color": active_color,
+                "background-color": "var(--active-color)",
                 "box-shadow": "none"
             });
         } else {
@@ -478,7 +478,7 @@ function initControls() {
             FS.main.map2.getOverlays().clear();
         } else {
             FS.main.map1.removeInteraction(FS.main.draw);
-            btnMesureSurface.style.background = active_color;
+            btnMesureSurface.style.background = "var(--active-color)";
             btnMesureDistance.style.background = 'transparent';				
             FS.main.ModeMesure = 'Surface'
             Mesure();
@@ -491,13 +491,13 @@ function initControls() {
     });		
     $("#btnCoordonnees").hover(function(){
         $(this).css({
-            "background-color": highlight_color,
-            "box-shadow":"2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha)"
+            "background-color": "var(--highlight-color)",
+            "box-shadow":"2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1)"
         });		
         }, function(){
         if (FS.main.ModeCoord == 1) {
             $(this).css({
-                "background-color": active_color,
+                "background-color": "var(--active-color)",
                 "box-shadow": "none"
             });
         } else {
@@ -532,13 +532,13 @@ function initControls() {
     });		
     $("#btnPermalien").hover(function(){
         $(this).css({
-            "background-color": highlight_color,
-            "box-shadow":"2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha)"
+            "background-color": "var(--highlight-color)",
+            "box-shadow":"2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1)"
         });				
         }, function(){
         if (FS.main.ModePermalien == 1) {
             $(this).css({
-                "background-color": active_color,
+                "background-color": "var(--active-color)",
                 "box-shadow": "none"
             });
         } else {
@@ -556,17 +556,17 @@ function initControls() {
         document.execCommand("copy");
         $("#clipboard").css("visibility", "hidden");
         $('#panneauPermalien').hide(400);
-        btnPermalien.style.background = background_color;
+        btnPermalien.style.background = FS.main.background_color;
         FS.main.ModePermalien = 0;
     });
     $("#emailP").on('click', function(e) {
         $('#panneauPermalien').hide(400);
-        btnPermalien.style.background = background_color;
+        btnPermalien.style.background = FS.main.background_color;
         FS.main.ModePermalien = 0;	
     });
     $("#annulerP").on('click', function(e) {
         $('#panneauPermalien').hide(400);
-        btnPermalien.style.background = background_color;
+        btnPermalien.style.background = FS.main.background_color;
         FS.main.ModePermalien = 0;	
     });
     

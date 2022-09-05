@@ -1,17 +1,19 @@
-/*image_compare v1.4*/
+/*image_compare v1.5*/
 
 :root {
 	--background-color: #31455d;
 	--background-color-alpha: rgba(49,69,93, 0.8);
 	--highlight-color: #46cfc0;
-	--highlight-color-alpha: rgba(70,207,192,0.9);
+	--highlight-color-alpha1: rgba(70,207,192,0.9);
+	--highlight-color-alpha2: rgba(70,207,192,0.2);
 	--active-color:#fbaf17;
+	--active_color_alpha: rgba(251, 175, 23, 0.1);
 	--shadow-color: rgba(90,90,90,0.5);
 	--alert-color-alpha: rgba(136,0,27, 0.7);
 	--white-color: rgba(255,255,255,1);
   }
-  /* These variables cannot be used by Microsoft Edge, you have to change the values manually at the following lines: 236, 705, 707
-  
+
+
  
 /* Style de la page */
 body, html {
@@ -162,7 +164,7 @@ a:visited {
 .btnI:hover {
 	cursor: pointer;
 	background: var(--highlight-color);
-	box-shadow: 2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha) ;
+	box-shadow: 2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1) ;
 }
 #btnIG {
 	display : none;
@@ -237,7 +239,7 @@ a:visited {
 	width: 1em;
 	height: 1em;
 	border-radius: 10%;
-	background:  #46cfc0;
+	background:  var(--highlight-color);
 	cursor: col-resize;
 }
 .sliderOpacite::-ms-tooltip {
@@ -283,10 +285,10 @@ a:visited {
 	border: 0;
 }
 .ui-button .ui-icon {
-	background-image: url(ui-icons_777777_256x240.png);
+	background-image: url(../img/ui-icons_777777_256x240.png);
 }
 .ui-button:hover .ui-icon {
-	background-image: url(ui-icons_777777_256x240.png);
+	background-image: url(../img/ui-icons_777777_256x240.png);
 }
 .ui-menu-item-wrapper {
 	width: 280px;
@@ -295,7 +297,7 @@ a:visited {
 	width: 280px;
 	background: var(--highlight-color);
 	border: 1px solid var(--highlight-color);
-	box-shadow: 2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha) ;
+	box-shadow: 2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1) ;
 } 
 .ui-front {
 	width: 300px !important;
@@ -515,7 +517,7 @@ a:visited {
 .boutonPermalien:hover {
 	background: var(--highlight-color);
 	border-color: var(--highlight-color);
-	box-shadow: 2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha) ;
+	box-shadow: 2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1) ;
 }
 #emailP a:link {
 	color: var(--white-color);
@@ -560,7 +562,7 @@ a:visited {
     border: 2px solid var(--background-color);
     border-radius: 4px;
 	background-color: white;
-    background-image: url('rechercher.png');
+    background-image: url('../img/rechercher.png');
     background-position: 3px 4px; 
     background-repeat: no-repeat;
     padding-left: 30px;
@@ -618,7 +620,7 @@ a:visited {
 }
 .resultatAdresse:hover {
 	background-color: var(--highlight-color);
-	box-shadow: 2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha) ;	
+	box-shadow: 2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1) ;	
 }
 
 
@@ -651,7 +653,6 @@ a:visited {
 	background-color: var(--background-color-alpha);
 	box-shadow: 5px 5px 6px var(--shadow-color);
 }
-
 .ol-zoom-in {
 	background-color: var(--background-color-alpha);
 	box-shadow: 5px 5px 6px var(--shadow-color);
@@ -661,7 +662,18 @@ a:visited {
 	box-shadow: 5px 5px 6px var(--shadow-color);
 }
 .ol-zoomslider button {
-	background: var(--highlight-color-alpha);
+	background: var(--highlight-color-alpha1);
+}
+.ol-zoom-extent{
+	top: 285px;
+}
+.ol-zoom-extent button {
+	width: 26px;
+	height: 26px;
+	box-shadow: 5px 5px 6px var(--shadow-color);
+}
+.ol-zoom-extent img {
+	margin: 4px 4px 4px 4px;
 }
 
 .coords {
@@ -722,7 +734,7 @@ a:visited {
 
 .tooltip {
     position: relative;
-    background: var(--highlight-color-alpha);
+    background: var(--highlight-color-alpha1);
 	border-radius: 4px;
 	color: var(--white-color);
 	padding: 4px 8px;
@@ -743,7 +755,7 @@ a:visited {
 }
 .tooltip-measure:before,
 .tooltip-static:before {
-	border-top: 6px solid var(--highlight-color-alpha);
+	border-top: 6px solid var(--highlight-color-alpha1);
 	border-right: 6px solid transparent;
 	border-left: 6px solid transparent;
 	content: "";
@@ -835,7 +847,7 @@ a:visited {
 .imgChoix:hover {
 	cursor: pointer;
 	background: var(--highlight-color);
-	box-shadow: 2px 2px 10px var(--highlight-color-alpha), -2px -2px 10px var(--highlight-color-alpha) ;
+	box-shadow: 2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1) ;
 }
 
 @keyframes avert_anim {
@@ -873,4 +885,8 @@ hr {
 	margin-bottom: 4px;
 	color: var(--white-color);
 	background-color: var(--white-color);
+}
+
+@media (hover: none) {
+	a:hover { color: inherit; }
 }

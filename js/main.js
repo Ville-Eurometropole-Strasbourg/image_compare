@@ -1,4 +1,4 @@
-//image_compare version 1.4
+//image_compare version 1.5
 
 var FS = FS || {}; //utilise l'objet FS s'il existe ou (||) créé un nouvel objet {}
 var capabilities = new Array();	
@@ -6,29 +6,92 @@ var chargementCap = 0;
 var wtoolbar = 62;
 var htoolbar;
 
-// Définition des couleurs principales
-
-var background_color = '#31455d';
-var highlight_color = '#46cfc0';
-var highlight_color_alpha1 = 'rgba(70, 207, 192, 0.9)';
-var highlight_color_alpha2  = 'rgba(70, 207, 192, 0.2)';
-var active_color = '#fbaf17';
-var active_color_alpha = 'rgba(251, 175, 23, 0.1)';
-
 
 FS.main = {
-	init : function (tabdata,langageData) {
+	init : function (tabdata,langageData,paramData) {
 		console.log('init');
 /**--------------------------------------------------------------
-	Défintion des données à afficher et mise en place 
+	Défintion des données à afficher, des paramètres et mise en place 
 ----------------------------------------------------------------*/	
 
 		// récupération des variables générales contenant les données et les traductions et affectation aux variables internes
 		FS.main.donnees = tabdata;
 		FS.main.langage = langageData;
+		FS.main.param = paramData;
 
 /** ZONE DE TRANSFERT */
 
+/**--------------------------------------------------------------
+	Récupération des paramètres
+----------------------------------------------------------------*/	
+
+for(var i in FS.main.param) {
+	if (FS.main.param[i][0] == "Xmin") {
+		FS.main.Xmin = parseFloat(FS.main.param[i][1]);
+	}
+	if (FS.main.param[i][0] == "Ymin") {
+		FS.main.Ymin = parseFloat(FS.main.param[i][1]);
+	}
+	if (FS.main.param[i][0] == "Xmax") {
+		FS.main.Xmax = parseFloat(FS.main.param[i][1]);
+	}
+	if (FS.main.param[i][0] == "Ymax") {
+		FS.main.Ymax = parseFloat(FS.main.param[i][1]);
+	}
+	if (FS.main.param[i][0] == "VueLon") {
+		FS.main.VueLon = parseFloat(FS.main.param[i][1]);
+	}
+	if (FS.main.param[i][0] == "VueLat") {
+		FS.main.VueLat = parseFloat(FS.main.param[i][1]);
+	}
+	if (FS.main.param[i][0] == "Zmin") {
+		FS.main.Zmin = parseFloat(FS.main.param[i][1]);
+	}
+	if (FS.main.param[i][0] == "Zmax") {
+		FS.main.Zmax = parseFloat(FS.main.param[i][1]);
+	}
+	if (FS.main.param[i][0] == "Zini") {
+		FS.main.Zini = parseFloat(FS.main.param[i][1]);
+	}
+	if (FS.main.param[i][0] == "HostPlatformURL") {
+		FS.main.HostPlatformURL = FS.main.param[i][1];
+	}
+	if (FS.main.param[i][0] == "HostPlatformName") {
+		FS.main.HostPlatformName = FS.main.param[i][1];
+	}
+	if (FS.main.param[i][0] == "LocalCoordSysEPSG") {
+		FS.main.LocalCoordSysEPSG = FS.main.param[i][1];
+	}
+	if (FS.main.param[i][0] == "LocalCoordSysDef") {
+		FS.main.LocalCoordSysDef = FS.main.param[i][1];
+	}	
+	if (FS.main.param[i][0] == "AdressSearchURL") {
+		FS.main.AdressSearchURL = FS.main.param[i][1];
+	}	
+	if (FS.main.param[i][0] == "WMS URL for getcapabilities used for attributions and metadata (table of 2 values)") {
+		FS.main.WmsURL = FS.main.param[i][1];
+	}	
+	if (FS.main.param[i][0] == "startImage1") {
+		FS.main.startImage1 = FS.main.param[i][1];
+	}	
+	if (FS.main.param[i][0] == "startImage2") {
+		FS.main.startImage2 = FS.main.param[i][1];
+	}	
+}
+
+/**--------------------------------------------------------------
+	Récupération des styles depuis le fichier CSS
+----------------------------------------------------------------*/	
+FS.main.background_color = getCSSVariable('--background-color');
+FS.main.background_color_alpha = getCSSVariable('--background-color-alpha');
+FS.main.highlight_color_alpha1 = getCSSVariable('--highlight-color-alpha1');
+FS.main.highlight_color_alpha2 = getCSSVariable('--highlight-color-alpha2');
+FS.main.active_color = getCSSVariable('--active-color');
+FS.main.active_color_alpha = getCSSVariable('--active-color-alpha');
+FS.main.background_color = getCSSVariable('--background-color');
+FS.main.shadow_color = getCSSVariable('--shadow-color');
+FS.main.alert_color_alpha = getCSSVariable('--alert-color-alpha');
+ 
 
 /**--------------------------------------------------------------
 	Récupération des données d'URL (si elles existent) afin de 
@@ -38,17 +101,26 @@ FS.main = {
 		if (URLparams != undefined) {
 			var I1 = URLparams.get("I1");
 			if (I1 != null) {
-				for(var i in FS.main.donnees) {
-					if (FS.main.donnees[i][0] == "startImage1") {
-						FS.main.donnees[i][1] = I1-1;
+				if (I1 > 0 && I1 < FS.main.donnees.length-1) {
+					FS.main.startImage1 = I1-1;
+					console.log(I1);
+				} else {
+					for(var i in FS.main.donnees) {
+						if (FS.main.donnees[i][0] == I1) {
+							FS.main.startImage1 = i-1;
+						}
 					}
 				}
 			}
 			var I2 = URLparams.get("I2");
 			if (I2 != null) {
-				for(var i in FS.main.donnees) {
-					if (FS.main.donnees[i][0] == "startImage2") {
-						FS.main.donnees[i][1] = I2-1;
+				if (I2 > 0 && I2 < FS.main.donnees.length-1) {
+					FS.main.startImage2 = I2-1;
+				} else {
+					for(var i in FS.main.donnees) {
+						if (FS.main.donnees[i][0] == I2) {
+							FS.main.startImage2 = i-1;
+						}
 					}
 				}
 			}
@@ -63,7 +135,7 @@ FS.main = {
 
 		var source = [];
 		var couches = [];
-		var nb_couches = FS.main.donnees.length-4
+		var nb_couches = FS.main.donnees.length-1
 
 		for(var i= 0; i < nb_couches; i++) {
 			if (FS.main.donnees[i+1][1] == 'XYZ') {
@@ -92,14 +164,13 @@ FS.main = {
 		};
 
 		for(var i= 0; i < nb_couches; i++) {	
-			couches[FS.main.donnees.length-4+i] = new ol.layer.Tile ({
+			couches[FS.main.donnees.length-1+i] = new ol.layer.Tile ({
 				source: source[i],
 				opacity: 1,
 				name: FS.main.donnees[i+1][0]+'_BIS',
 				visible : false
 			});
 		};
-	
 	
 /**--------------------------------------------------------------
 	Couche des mesures
@@ -112,16 +183,16 @@ FS.main = {
 			visible : true,
 			style: new ol.style.Style({
 			    fill: new ol.style.Fill({
-					color: active_color_alpha
+					color: FS.main.active_color_alpha
 				}),
 				stroke: new ol.style.Stroke({
-					color: active_color ,
+					color: FS.main.active_color ,
 					width: 2
 				}),
 			    image: new ol.style.Circle({
 					radius: 7,
 					fill: new ol.style.Fill({
-						color: active_color 
+						color: FS.main.active_color 
 					})
 			    })
 			})
@@ -135,26 +206,50 @@ FS.main = {
 			var Y = URLparams.get("Y");
 			var Z = URLparams.get("Z");
 		}
-		if (X != null && Y != null & Z != null){
+		if (X != null && Y != null && Z != null){
+			
+			Xmerc = ol.proj.fromLonLat([parseFloat(X),parseFloat(Y)])[0];
+			Ymerc = ol.proj.fromLonLat([parseFloat(X),parseFloat(Y)])[1];
+			if (Xmerc >= FS.main.Xmin && Xmerc <= FS.main.Xmax && Ymerc >= FS.main.Ymin && Ymerc <= FS.main.Ymax) {
+				centerX = parseFloat(X);
+				centerY = parseFloat(Y) 			
+			} else {
+					centerX = FS.main.VueLon;
+					centerY = FS.main.VueLat
+			}
+			if (parseFloat(Z)>=FS.main.Zmin && parseFloat(Z)<=FS.main.Zmax) {
+				Zinitial = parseFloat(Z);		
+			} else {
+					Zinitial = FS.main.Zini
+			}
 			FS.main.vue = new ol.View({ // création de la vue, par défaut en Mercator
-				center: [parseFloat(X), parseFloat(Y)],
-				zoom: Z, // niveau de zoom
-				extent: [848000,6180500,880000,6221800], // étendue maximale du centre de la carte
-				minZoom : 11,
-				maxZoom : 21
+				center: ol.proj.fromLonLat([centerX,centerY]),
+				zoom: Zinitial, // niveau de zoom
+				extent: [FS.main.Xmin,FS.main.Ymin,FS.main.Xmax,FS.main.Ymax], // étendue maximale du centre de la carte
+				minZoom : FS.main.Zmin,
+				maxZoom : FS.main.Zmax,
+				enableRotation : false
 			});
-		} else {
+		} else {			
 			FS.main.vue = new ol.View({ // création de la vue, par défaut en Mercator
-				center: ol.proj.fromLonLat([7.75,48.58]), // transformation des coordonnées en degrés vers Mercator 
-				zoom: 14, // niveau de zoom
-				extent: [848000,6180500,880000,6221800], // étendue maximale du centre de la carte
-				minZoom : 11,
-				maxZoom : 21
+				center: ol.proj.fromLonLat([FS.main.VueLon,FS.main.VueLat]), // transformation des coordonnées en degrés vers Mercator 
+				zoom: FS.main.Zini, // niveau de zoom
+				extent: [FS.main.Xmin,FS.main.Ymin,FS.main.Xmax,FS.main.Ymax], // étendue maximale du centre de la carte
+				minZoom : FS.main.Zmin,
+				maxZoom : FS.main.Zmax,
+				enableRotation : false
 			});
 		}
 		
 		var scaleLine = new ol.control.ScaleLine();
 		var zoomSlider = new ol.control.ZoomSlider();
+		var zoomTE = document.createElement('span');
+		zoomTE.innerHTML = '<img src="img/globe.png" width="18" height="18">';
+		var zoomExtent = new ol.control.ZoomToExtent({
+			extent: [FS.main.Xmin,FS.main.Ymin,FS.main.Xmax,FS.main.Ymax],
+			label: zoomTE
+		  });
+
 		//var fullScreen = new ol.control.FullScreen();
 
 		var layers1 = [];
@@ -164,16 +259,17 @@ FS.main = {
 		layers1[layers1.length]=FS.main.vectorLayer;
 
 		var layers2 = [];
-		for(var i= 0; i < FS.main.donnees.length-4; i++) {
-			layers2[i]=couches[i+FS.main.donnees.length-4];
+		for(var i= 0; i < FS.main.donnees.length-1; i++) {
+			layers2[i]=couches[i+FS.main.donnees.length-1];
 		}
 		layers2[layers2.length]=FS.main.vectorLayer;
+
 		FS.main.map1 = new ol.Map({
 			target: 'carte1', // cible de la carte
 			layers: layers1,
 			view: 
 				FS.main.vue,
-			controls: [new ol.control.Zoom,scaleLine,zoomSlider]
+			controls: [new ol.control.Zoom, zoomExtent, scaleLine,zoomSlider]
 		});	
 
 		
@@ -184,7 +280,7 @@ FS.main = {
 				FS.main.vue,
 			controls: []
 		});
-		
+
 /**--------------------------------------------------------------
 	Message d'alerte pour IE 
 ----------------------------------------------------------------*/
@@ -249,7 +345,8 @@ FS.main = {
 			}
 		}
 		changeLangage(FS.main.langue,"init"); // lance aussi la fonction FS.main.ChangeImage('A'); qui initialise de la lectures des attributions et metadonnées
-		
+
+
 		initControls(); // Initialisation des contrôles
 		initEvents(); // Initialisation des évènements de cartes et taille de fenêtre de navigateur
 		
@@ -296,6 +393,7 @@ FS.main = {
 				"right": "0px",
 				"top": "80px"
 			});
+			$("a:has(img)").each(function() { $(this).replaceWith($(this).children()); });
 			wtoolbar = 0;
 			$( "#carte1" ).css("width", '100%');
 			FS.main.map1.updateSize();
@@ -315,24 +413,29 @@ FS.main = {
 /** FIN DE ZONE DE TRANSFERT */
 
 $(function() { //function permet de lancer le contenu lorsque la page est chargée
-	// récupération des données dans les fichiers donnees.json et langage.json situés au même niveau que le fichier html
-	var StreamsData, languageData;
+	// récupération des données dans les fichiers donnees.json, langage.json et param.json situés au même niveau que le fichier html
+	var StreamsData, languageData, parameterData;
 	$.when(
 		$.getJSON("donnees.json", function(data) {
 			StreamsData = data;
 		}),
 		$.getJSON("langage.json", function(data) {
 			languageData = data;
+		}),
+		$.getJSON("param.json", function(data) {
+			parameterData = data;
 		})
 	).then(function() {
-		if (StreamsData && languageData) {
-			FS.main.init(StreamsData,languageData);
+		if (StreamsData && languageData && parameterData) {
+			FS.main.init(StreamsData,languageData,parameterData);
 		}
 		else {
 			alert("Erreur de chargement / loading error")
 		}
 	
 
+	}, function(){
+		window.location.href = 'https://sig.strasbourg.eu/DEV_ImageCompare/erreur.html';
 	});
 	
 });

@@ -1,6 +1,11 @@
-//image_compare version 1.4
+//image_compare version 1.5
 
 //Fichier des fonctions 
+
+function getCSSVariable(varName) {
+	return getComputedStyle(document.documentElement)
+	  .getPropertyValue(varName);
+};
 
 function attribution(nom) {
 	var attributions = new Array();
@@ -58,7 +63,7 @@ function changeLangage(langue,init) { // Mise en place des textes en fonction de
 	FS.main.langue = langue;
 
 	for(var i= 1; i < FS.main.donnees.length; i++) {
-		if (FS.main.donnees[i][0] != 'startImage1' && FS.main.donnees[i][0] != 'startImage2' && FS.main.donnees[i][0] != 'internal name' && FS.main.donnees[i][0] != "WMS URL for getcapabilities used for attributions and metadata (table of 2 values)") {
+		if (FS.main.donnees[i][0] != 'internal name') {
 			if (init == "init") {
 				$('#ImageGauche').append($('<option>', {
 					value: FS.main.donnees[i][0],
@@ -73,13 +78,6 @@ function changeLangage(langue,init) { // Mise en place des textes en fonction de
 				$('#ImageDroite option')[i-1].text = FS.main.donnees[i][5+langue]
 			}
 		};
-		if (FS.main.donnees[i][0] == 'startImage1' && init == "init") {
-			$('#ImageGauche option')[FS.main.donnees[i][1]].selected = true;
-		};
-		if (FS.main.donnees[i][0] == 'startImage2'  && init == "init") {
-			$('#ImageDroite option')[FS.main.donnees[i][1]].selected = true;
-		};
-
 		$(".custom-combobox-input").each(function() {
 			nblangue = FS.main.langage[0].length
 			for(j = 5; j< 5+nblangue ; j++) {
@@ -89,6 +87,11 @@ function changeLangage(langue,init) { // Mise en place des textes en fonction de
 			}
 		});
 
+	};
+
+	if (init == "init") {
+		$('#ImageGauche option')[FS.main.startImage1].selected = true;
+		$('#ImageDroite option')[FS.main.startImage2].selected = true;
 	};
 
 	$("#label_titre").html(FS.main.langage[1][langue]);
@@ -115,9 +118,9 @@ function changeLangage(langue,init) { // Mise en place des textes en fonction de
 	$("#tt_PNG").html(FS.main.langage[22][langue]);
 	$("#tt_Imprimer").html(FS.main.langage[23][langue]);
 	if (FS.main.Kiosque == 0) {
-		$("#plateforme").html(FS.main.langage[24][langue]+' <a target="_blank" href="https://www.datagrandest.fr/portail/">DataGrandEst</a> '+FS.main.langage[25][langue]);
+		$("#plateforme").html(FS.main.langage[24][langue]+' <a target="_blank" href="'+FS.main.HostPlatformURL+'">'+FS.main.HostPlatformName+'</a> '+FS.main.langage[25][langue]);
 	} else {
-		$("#plateforme").html(FS.main.langage[24][langue]+' DataGrandEst '+FS.main.langage[25][langue]);
+		$("#plateforme").html(FS.main.langage[24][langue]+' '+FS.main.HostPlatformName+' '+FS.main.langage[25][langue]);
 	}
 	$("#tt_Permalien").html(FS.main.langage[38][FS.main.langue]);
 	$("#titrePermalien").html(FS.main.langage[39][FS.main.langue]);
@@ -142,15 +145,16 @@ function changeLangage(langue,init) { // Mise en place des textes en fonction de
 			$(this).css("color", "#7e7e7e");
 		});
 	};
+
 	langue=langue+1;	// modification de l'apparence du bouton de langue courante
 	var btn_langue ="#L"+langue
-	$(btn_langue).css("background-color", background_color);
+	$(btn_langue).css("background-color", FS.main.background_color);
 	$(btn_langue).css("color", "#FFFFFF");	
 	$(btn_langue).hover(function(){
-		$(this).css("background-color", background_color);
+		$(this).css("background-color", FS.main.background_color);
 		$(this).css("color", "#FFFFFF");
 	}, function(){
-		$(this).css("background-color", background_color);
+		$(this).css("background-color", FS.main.background_color);
 		$(this).css("color", "#FFFFFF");
 	});	
 
@@ -160,7 +164,7 @@ function changeLangage(langue,init) { // Mise en place des textes en fonction de
 function Cote() { // mise en place du mode côte à côte
 	
 	if (FS.main.CompareCote != 1) { // mise en place de l'interface de cette méthode
-		btnCote.style.background = active_color;		
+		btnCote.style.background = FS.main.active_color;		
 		$('#croix').css("visibility","visible");
 		var moitie = ($(document).width() - wtoolbar)/2
 		$( "#carte1" ).animate({width: moitie},800, function() {
@@ -239,7 +243,7 @@ function Superpose() { // mise en place du mode de superposition des images
 	};	
 			
 	if (FS.main.CompareSuperpose != 1) {  // mettre en place l'interface de cette méthode			
-		btnSuperpose.style.background = active_color;		
+		btnSuperpose.style.background = FS.main.active_color;		
 		$('#opaciteG').show(800);
 		$('#opaciteD').show(800);			
 		FS.main.CompareSuperpose = 1;	
@@ -291,7 +295,7 @@ function Switch(swipeURL) { // mise en place du mode avec réglette
 	};
 
 	if (FS.main.CompareSwitcher != 1) {  // mettre en place l'interface de cette méthode
-		btnSwitcher.style.background = active_color;
+		btnSwitcher.style.background = FS.main.active_color;
 		$('#switcher').show(800);
 		FS.main.CompareSwitcher = 1;
 		ChoixImage();
@@ -339,10 +343,10 @@ function Switch(swipeURL) { // mise en place du mode avec réglette
 function Coordonnees() {
 
 	if (FS.main.ModeCoord != 1) {  // mettre en place l'interface de cet outil
-		btnCoordonnees.style.background = active_color;
+		btnCoordonnees.style.background = FS.main.active_color;
 		$('#zoneCoordonnees').show(800);
 		
-		proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
+		proj4.defs("EPSG:"+FS.main.LocalCoordSysEPSG,FS.main.LocalCoordSysDef);
 		ol.proj.setProj4(proj4);
 		const RGF93 = ol.proj.get('EPSG:2154'); 
 
@@ -397,13 +401,13 @@ function Coordonnees() {
 function Permaliens() {
 
 	if (FS.main.ModePermalien != 1 && FS.main.Impression != 1) {  // mettre en place l'interface de cet outil
-		btnPermalien.style.background = active_color;
+		btnPermalien.style.background = FS.main.active_color;
 		$('#panneauPermalien').show(400);
 		
 		var L = FS.main.langue+1;
-		var I1 = $('#ImageGauche').prop('selectedIndex')+1
-		var I2 = $('#ImageDroite').prop('selectedIndex')+1
-		var center = ol.coordinate.format(FS.main.map1.getView().getCenter(), '&X={x}&Y={y}', 0);
+		var I1 = FS.main.donnees[$('#ImageGauche').prop('selectedIndex')+1][0];
+		var I2 = FS.main.donnees[$('#ImageDroite').prop('selectedIndex')+1][0];
+		var center = ol.coordinate.format(ol.proj.transform(FS.main.map1.getView().getCenter(), 'EPSG:3857', 'EPSG:4326'), '&X={x}&Y={y}', 5);
 		var Z= FS.main.map1.getView().getZoom()
 
 		permalien = decodeURIComponent(location.host)+decodeURIComponent(location.pathname)+'?L='+L+'&I1='+I1+'&I2='+I2+center+"&Z="+Z
@@ -432,7 +436,7 @@ function Permaliens() {
 		FS.main.ModePermalien = 1;
 	} else {								// si cette méthode était déjà active, ôter l'interface de cette méthode
 		$('#panneauPermalien').hide(400);
-		btnPermalien.style.background = background_color;
+		btnPermalien.style.background = FS.main.background_color;
 		FS.main.ModePermalien = 0;		
 	}
 };
@@ -536,14 +540,14 @@ function Telecharger() {
 		if (attribG != null && attribG != 0) {
 			var widthG = context.measureText(attribG).width;
 			context.fillRect(0, sizeHeight-16, widthG+6, 16);
-			context.fillStyle = background_color;
+			context.fillStyle = FS.main.background_color;
 			context.fillText(attribG, 2, sizeHeight-4);
 		}
 		context.fillStyle = "#ffffff";
 		if (attribD != null && attribG != 0 && FS.main.CompareCote != 1) {
 			var widthD = context.measureText(attribD).width;
 			context.fillRect(sizeWidth/2, sizeHeight-16, widthD+6, 16);
-			context.fillStyle = background_color;		
+			context.fillStyle = FS.main.background_color;		
 			context.fillText(attribD, sizeWidth/2+2, sizeHeight-4);
 		}
 		if (navigator.msSaveBlob) {
@@ -1026,7 +1030,7 @@ function LargeurCarte() { // définit les hauteurs de carte en fonction des navi
 		
 function chercheAdresse() {
 	var adresse = $('#adresse').val();
-	var url = 'https://adict.strasbourg.eu/addok/search?q=' + adresse;
+	var url = FS.main.AdressSearchURL + adresse;
 	
 	if(adresse.length>2) {
 		$("#annul_adresse").show(0);
@@ -1065,14 +1069,16 @@ function zoomAdresse(e) { // zoom sur les coordonnées du point adresse identifi
 };
 
 function Combobox_hover(input) {
-	$("#apercu").html('');
-	var apercu = input.innerText;
-	for (var i in FS.main.donnees) {
-		if (apercu == FS.main.donnees[i][5+FS.main.langue]) {
-			$("#apercu").html('<img src="img/'+FS.main.donnees[i][0]+'.jpg"/>');
-			$("#apercu").show(0);	
-		}			
-	};
+	if (FS.main.Kiosque == 0) {
+		$("#apercu").html('');
+		var apercu = input.innerText;
+		for (var i in FS.main.donnees) {
+			if (apercu == FS.main.donnees[i][5+FS.main.langue]) {
+				$("#apercu").html('<img src="img/'+FS.main.donnees[i][0]+'.jpg"/>');
+				$("#apercu").show(0);	
+			}			
+		};
+	}
 };
 	
 function Combobox_endhover(input) {
@@ -1106,8 +1112,6 @@ function ChoixImage() { // gère le changement de couche dans les menus de séle
 			return layer.get('name') == choixImageDroite;
 		})[0];
 		ImageDroite.setZIndex( 1000 );
-
-
 	} else {
 		var ImageDroite = jQuery.grep(FS.main.map1.getLayers().getArray(), function(layer) {
 			return layer.get('name') == choixImageDroite;
@@ -1195,7 +1199,7 @@ function ChangeImage(cote) {
 		$.when( 				
 			$.ajax({
 				type: "GET",
-				url: FS.main.donnees[FS.main.donnees.length-1][1][0]+'/wms?service=wms&version=1.3.0&request=GetCapabilities',
+				url: FS.main.WmsURL[0]+'/wms?service=wms&version=1.3.0&request=GetCapabilities',
 				cache: false,
 				dataType: "xml",
 				success: function(xml) {
@@ -1204,7 +1208,7 @@ function ChangeImage(cote) {
 				}),
 				$.ajax({
 					type: "GET",
-					url: FS.main.donnees[FS.main.donnees.length-1][1][1]+'/wms?service=wms&version=1.3.0&request=GetCapabilities',
+					url: FS.main.WmsURL[1]+'/wms?service=wms&version=1.3.0&request=GetCapabilities',
 					cache: false,
 					dataType: "xml",
 					success: function(xml) {
@@ -1427,20 +1431,20 @@ function Mesure() {
 		type: type,
 		style: new ol.style.Style({
 		fill: new ol.style.Fill({
-			color: highlight_color_alpha2
+			color: FS.main.highlight_color_alpha2
 		}),
 		stroke: new ol.style.Stroke({
-			color: highlight_color_alpha1,
+			color: FS.main.highlight_color_alpha1,
 			lineDash: [10, 10],
 			width: 2
 		}),
 		image: new ol.style.Circle({
 			radius: 5,
 			stroke: new ol.style.Stroke({
-			color: highlight_color_alpha1
+			color: FS.main.highlight_color_alpha1
 			}),
 			fill: new ol.style.Fill({
-			color: highlight_color_alpha2
+			color: FS.main.highlight_color_alpha2
 			})
 		})
 		})
@@ -1519,4 +1523,3 @@ function Mesure() {
 
 	addInteraction();	  	
 };
-
