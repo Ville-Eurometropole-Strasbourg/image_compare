@@ -6,7 +6,6 @@ var chargementCap = 0;
 var wtoolbar = 62;
 var htoolbar;
 
-
 FS.main = {
 	init : function (tabdata,langageData,paramData) {
 		console.log('init');
@@ -435,7 +434,7 @@ $(function() { //function permet de lancer le contenu lorsque la page est charg√
 	
 
 	}, function(){
-		window.location.href = 'https://sig.strasbourg.eu/DEV_ImageCompare/erreur.html';
+		window.location.href = 'https://sig.strasbourg.eu/2018_ImageCompare/erreur.html';
 	});
 	
 });

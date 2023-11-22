@@ -77,7 +77,6 @@ function initControls() {
             input.autocomplete( "widget" ).each(function() {
                 $(this).on('mouseenter', "li", function(){
                          Combobox_hover(this);
-                         console.log('test');
                 });
 
             });
@@ -144,9 +143,9 @@ function initControls() {
                 })
                 .removeClass( "ui-corner-all" )
                 .addClass( "custom-combobox-toggle ui-corner-right" )
-                .on( "mousedown", function() {
+                /*.on( "mousedown", function() {
                     wasOpen = input.autocomplete( "widget" ).is( ":visible" );
-                })
+                })*/
                 .on( "click", function() {
                     input.trigger( "focus" );
      
@@ -159,7 +158,7 @@ function initControls() {
                     input.autocomplete( "search", "" );
                 });
         },
- 
+
         _source: function( request, response ) {
             var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
             response( this.element.children( "option" ).map(function() {
