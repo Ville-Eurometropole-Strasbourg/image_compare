@@ -1,0 +1,27 @@
+configVersion: 1
+project: imagecompare
+
+deploy:
+  helmRelease: >-
+    [[ project ]]-[[ env ]]
+  helmReleaseSlug: true
+  namespace: >-
+    [[ project ]]-[[ env ]]
+  namespaceSlug: true
+
+cleanup:
+  keepPolicies:
+  - references:
+      branch: /.*/
+    imagesPerReference:
+      last: 10
+      in: 168h
+  - references:  
+      branch: /^(master)$/
+    imagesPerReference:
+      last: -1
+
+---
+image: appli
+dockerfile: Dockerfile
+context: .
