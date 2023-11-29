@@ -1,6 +1,6 @@
 # image_compare
 
-![](ortho_histo.png)
+![](src/img/ortho_histo.png)
 
 Comparison of images with openlayers 4
 
