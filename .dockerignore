@@ -1,0 +1,8 @@
+.git/
+.vscode/
+.gitignore
+.gitlab-ci.yml
+!Dockerfile
+README.md
+.helm/
+werf.yaml
