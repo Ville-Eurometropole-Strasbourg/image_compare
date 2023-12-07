@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    {{ if eq .Values.sslmode "letsencrypt" }}cert-manager.io/cluster-issuer: letsencrypt {{ end }}
+  name: {{ .Values.werf.name }}-{{ .Values.werf.env }}
+spec:
+  ingressClassName: nginx-agc
+  tls: 
+  - secretName: {{ .Values.sslmode }}-{{ .Values.werf.env }}
+    hosts:
+    - {{ .Values.env_url }}
+    
+  rules:
+  - host: {{ .Values.env_url }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.werf.name }}-{{ .Values.werf.env }}
+            port:
+              number: {{ .Values.app.port }}
