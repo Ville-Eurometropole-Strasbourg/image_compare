@@ -516,6 +516,18 @@
     0
   ],
   [
+    "Ortho_2022",
+    "https://www.datagrandest.fr/geoserver/ems/wms",
+    "EMS_Ortho_2022",
+    0,
+    "wms",
+    "2022 - Ortho-image couleur",
+    "2022 - Color orthoimage",
+    "2022 - Farb-Orthobild",
+    "2022 - Orthoimágen en color",
+    "wms"
+  ],
+  [
     "Fond_carte_EmS",
     "XYZ",
     "http://wgs-users.s3.amazonaws.com/cus/fonds/ems_gris/{z}/{x}/{y}.png",
