@@ -504,6 +504,18 @@
     "https://www.datagrandest.fr/data4citizen/visualisation/information/?id=fr-200052264-ignf_orthohr_rvb_lamb93_d67_2021&location=8,48.60079,7.56546&dataChart=eyJxdWVyaWVzIjpbeyJjb25maWciOnsiZGF0YXNldCI6ImZyLTIwMDA1MjI2NC1pZ25mX29ydGhvaHJfcnZiX2xhbWI5M19kNjdfMjAyMSIsIm9wdGlvbnMiOnsiaWQiOiJmci0yMDAwNTIyNjQtaWduZl9vcnRob2hyX3J2Yl9sYW1iOTNfZDY3XzIwMjEifX0sImNoYXJ0cyI6W3siYWxpZ25Nb250aCI6dHJ1ZSwidHlwZSI6ImNvbHVtbiIsImZ1bmMiOiJBVkciLCJ5QXhpcyI6Im5vbSIsInNjaWVudGlmaWNEaXNwbGF5Ijp0cnVlLCJjb2xvciI6IiM2NmMyYTUifV0sInhBeGlzIjoibm9tIiwibWF4cG9pbnRzIjo1MCwic29ydCI6IiJ9XSwidGltZXNjYWxlIjoiIiwiZGlzcGxheUxlZ2VuZCI6dHJ1ZSwiYWxpZ25Nb250aCI6dHJ1ZX0%3D"
   ],
   [
+    "Ortho_2022",
+    "https://www.datagrandest.fr/geoserver/ems/wms",
+    "EMS_Ortho_2022",
+    0,
+    "wms",
+    "2022 - Ortho-image couleur",
+    "2022 - Color orthoimage",
+    "2022 - Farb-Orthobild",
+    "2022 - Orthoimágen en color",
+    "wms"
+  ],
+  [
     "Pleiades_2022",
     "https://wxs.ign.fr/satellite/geoportail/r/wms",
     "ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2022",
