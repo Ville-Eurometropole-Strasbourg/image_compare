@@ -134,7 +134,6 @@ Stop Homologation:
 Create Tag:
   stage: build
   image: harbor.strasbourg.cloud/tools/curl:7.82.0
-  # see : curlimages/curl:7.82.0
   script:
     - CURRENT_DATE=$(date '+%Y-%m-%d-%H-%M')
     - echo "$CURRENT_DATE"

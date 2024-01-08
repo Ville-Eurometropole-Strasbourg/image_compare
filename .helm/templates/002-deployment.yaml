@@ -22,6 +22,9 @@ spec:
         ports:
         - containerPort: {{ .Values.app.port }}
           name: http
+        env:
+        - name: url
+          value: https://{{ .Values.env_url }}
         resources:
           {{- toYaml .Values.app.resources | nindent 12 }}
 ---

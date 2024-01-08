@@ -1,7 +1,7 @@
 FROM harbor.strasbourg.cloud/library/nginx:alpine
 
 ENV appDir /app
-ENV url "https://image-compare.strasbourg.eu"
+ENV url "https://fixurl"
 
 RUN mkdir ${appDir} &&\
     adduser www-data -G www-data -D &&\
