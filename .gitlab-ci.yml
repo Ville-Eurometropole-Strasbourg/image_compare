@@ -27,7 +27,7 @@ default:
   stage: deploy
   script:
     - *base_werf
-    - werf converge --kube-config="${!KUBECONFIG_NAME}" --require-built-images --repo="$REGISTRY_URL/$REGISTRY_REPOSITORY" --set "env_url=$(echo ${CI_ENVIRONMENT_URL} | cut -d / -f 3)" --set "sslmode=${SSLMODE}" --set-docker-config-json-value=true
+    - werf converge --kube-config="${!KUBECONFIG_NAME}" --skip-build --repo="$REGISTRY_URL/$REGISTRY_REPOSITORY" --set "env_url=$(echo ${CI_ENVIRONMENT_URL} | cut -d / -f 3)" --set "sslmode=${SSLMODE}" --set-docker-config-json-value=true
 
 .base_cleanup: &base_cleanup
   stage: cleanup
