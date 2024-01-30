@@ -436,7 +436,7 @@ $(function () {
     },
     function () {
       window.location.href =
-        "https://sig.strasbourg.eu/2018_ImageCompare/erreur.html";
+        "https://remonterletemps.strasbourg.eu/erreur.html";
     }
   );
 });
