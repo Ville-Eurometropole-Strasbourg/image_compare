@@ -643,50 +643,98 @@ function Telecharger() {
     var sizeWidth = context.canvas.clientWidth;
     var sizeHeight = context.canvas.clientHeight;
 
-    try {
-      if (logoGURL != null && logoGURL != 0) {
-        var imageG = new Image();
-        imageG.setAttribute("crossOrigin", "use-credentials"); //getting images from external domain
-        imageG.src = logoGURL;
-        imageG.onload = function () {
+    fetch(logoGURL)
+    .then((response) => response.blob())
+    .then((blob) => {
+      const imageUrlG = URL.createObjectURL(blob);
+      var imageG = new Image();
+      imageG.src = imageUrlG;
+      
+      fetch(logoDURL)
+      .then((responseD) => responseD.blob())
+      .then((blobD) => {
+        const imageUrlD = URL.createObjectURL(blobD);
+        var imageD = new Image();
+        imageD.src = imageUrlD;
+        
+        if (logoGURL != null && logoGURL != 0) {
+          
+          imageG.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
+          imageG.src = logoGURL;
+          imageG.onload = function () {
+            if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
+              
+              imageD.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
+  
+                imageD.src = logoDURL;
+                imageD.onload = function () {
+                  context.drawImage(
+                    imageG,
+                    0,
+                    sizeHeight - 66,
+                    (imageG.width * 50) / imageG.height,
+                    50
+                  );
+                  context.drawImage(
+                    imageD,
+                    sizeWidth / 2,
+                    sizeHeight - 66,
+                    (imageD.width * 50) / imageD.height,
+                    50
+                  );
+                  definePNG(
+                    canvas,
+                    context,
+                    attribG,
+                    attribD,
+                    sizeWidth,
+                    sizeHeight,
+                    "gauche"
+                  );
+                };
+            } else {
+              context.drawImage(
+                imageG,
+                0,
+                sizeHeight - 66,
+                (imageG.width * 50) / imageG.height,
+                50
+              );
+              definePNG(
+                canvas,
+                context,
+                attribG,
+                attribD,
+                sizeWidth,
+                sizeHeight,
+                "gauche"
+              );
+            }
+          };
+        } else {
           if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
             var imageD = new Image();
-            imageD.setAttribute("crossOrigin", "use-credentials"); //getting images from external domain
-
-              imageD.src = logoDURL;
-              imageD.onload = function () {
-                context.drawImage(
-                  imageG,
-                  0,
-                  sizeHeight - 66,
-                  (imageG.width * 50) / imageG.height,
-                  50
-                );
-                context.drawImage(
-                  imageD,
-                  sizeWidth / 2,
-                  sizeHeight - 66,
-                  (imageD.width * 50) / imageD.height,
-                  50
-                );
-                definePNG(
-                  canvas,
-                  context,
-                  attribG,
-                  attribD,
-                  sizeWidth,
-                  sizeHeight,
-                  "gauche"
-                );
-              };
+            imageD.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
+            imageD.src = logoDURL;
+            imageD.onload = function () {
+              context.drawImage(
+                imageD,
+                sizeWidth / 2,
+                sizeHeight - 66,
+                (imageD.width * 50) / imageD.height,
+                50
+              );
+              definePNG(
+                canvas,
+                context,
+                attribG,
+                attribD,
+                sizeWidth,
+                sizeHeight,
+                "gauche"
+              );
+            };
           } else {
-            context.drawImage(
-              imageG,
-              0,
-              sizeHeight - 66,
-              (imageG.width * 50) / imageG.height,
-              50
-            );
             definePNG(
               canvas,
               context,
@@ -697,46 +745,29 @@ function Telecharger() {
               "gauche"
             );
           }
-        };
-      } else {
-        if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
-          var imageD = new Image();
-          imageD.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
-          imageD.src = logoDURL;
-          imageD.onload = function () {
-            context.drawImage(
-              imageD,
-              sizeWidth / 2,
-              sizeHeight - 66,
-              (imageD.width * 50) / imageD.height,
-              50
-            );
-            definePNG(
-              canvas,
-              context,
-              attribG,
-              attribD,
-              sizeWidth,
-              sizeHeight,
-              "gauche"
-            );
-          };
-        } else {
-          definePNG(
-            canvas,
-            context,
-            attribG,
-            attribD,
-            sizeWidth,
-            sizeHeight,
-            "gauche"
-          );
         }
+
+
+      })
+      .catch(error => {
+        if (error.name === 'TypeError' && error.message.includes('Network')) {
+          console.error('A network error occurred. This could be a CORS issue or a dropped connection. Error:', error);
+        } else {
+          console.error('An unknown error occurred:', error);
+        }
+      });
+
+    })
+    .catch(error => {
+      if (error.name === 'TypeError' && error.message.includes('Network')) {
+        console.error('A network error occurred. This could be a CORS issue or a dropped connection. Error:', error);
+      } else {
+        console.error('An unknown error occurred:', error);
       }
-    }
-    catch (e) {
-      logErreurs(e); // on transfère l'objet de l'exception à une méthode
-    }
+    });
+
+
+  
     }); 
     
   FS.main.map1.renderSync();
