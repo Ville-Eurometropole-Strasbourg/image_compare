@@ -646,12 +646,12 @@ function Telecharger() {
     try {
       if (logoGURL != null && logoGURL != 0) {
         var imageG = new Image();
-        imageG.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
+        imageG.setAttribute("crossOrigin", "use-credentials"); //getting images from external domain
         imageG.src = logoGURL;
         imageG.onload = function () {
           if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
             var imageD = new Image();
-            imageD.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
+            imageD.setAttribute("crossOrigin", "use-credentials"); //getting images from external domain
 
               imageD.src = logoDURL;
               imageD.onload = function () {
