@@ -643,16 +643,43 @@ function Telecharger() {
     var sizeWidth = context.canvas.clientWidth;
     var sizeHeight = context.canvas.clientHeight;
 
-    if (logoGURL != null && logoGURL != 0) {
-      var imageG = new Image();
-      imageG.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
-      imageG.src = logoGURL;
-      imageG.onload = function () {
-        if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
-          var imageD = new Image();
-          imageD.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
-          imageD.src = logoDURL;
-          imageD.onload = function () {
+    try {
+      if (logoGURL != null && logoGURL != 0) {
+        var imageG = new Image();
+        imageG.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
+        imageG.src = logoGURL;
+        imageG.onload = function () {
+          if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
+            var imageD = new Image();
+            imageD.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
+
+              imageD.src = logoDURL;
+              imageD.onload = function () {
+                context.drawImage(
+                  imageG,
+                  0,
+                  sizeHeight - 66,
+                  (imageG.width * 50) / imageG.height,
+                  50
+                );
+                context.drawImage(
+                  imageD,
+                  sizeWidth / 2,
+                  sizeHeight - 66,
+                  (imageD.width * 50) / imageD.height,
+                  50
+                );
+                definePNG(
+                  canvas,
+                  context,
+                  attribG,
+                  attribD,
+                  sizeWidth,
+                  sizeHeight,
+                  "gauche"
+                );
+              };
+          } else {
             context.drawImage(
               imageG,
               0,
@@ -660,6 +687,23 @@ function Telecharger() {
               (imageG.width * 50) / imageG.height,
               50
             );
+            definePNG(
+              canvas,
+              context,
+              attribG,
+              attribD,
+              sizeWidth,
+              sizeHeight,
+              "gauche"
+            );
+          }
+        };
+      } else {
+        if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
+          var imageD = new Image();
+          imageD.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
+          imageD.src = logoDURL;
+          imageD.onload = function () {
             context.drawImage(
               imageD,
               sizeWidth / 2,
@@ -678,13 +722,6 @@ function Telecharger() {
             );
           };
         } else {
-          context.drawImage(
-            imageG,
-            0,
-            sizeHeight - 66,
-            (imageG.width * 50) / imageG.height,
-            50
-          );
           definePNG(
             canvas,
             context,
@@ -695,43 +732,13 @@ function Telecharger() {
             "gauche"
           );
         }
-      };
-    } else {
-      if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
-        var imageD = new Image();
-        imageD.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
-        imageD.src = logoDURL;
-        imageD.onload = function () {
-          context.drawImage(
-            imageD,
-            sizeWidth / 2,
-            sizeHeight - 66,
-            (imageD.width * 50) / imageD.height,
-            50
-          );
-          definePNG(
-            canvas,
-            context,
-            attribG,
-            attribD,
-            sizeWidth,
-            sizeHeight,
-            "gauche"
-          );
-        };
-      } else {
-        definePNG(
-          canvas,
-          context,
-          attribG,
-          attribD,
-          sizeWidth,
-          sizeHeight,
-          "gauche"
-        );
       }
     }
-  });
+    catch (e) {
+      logErreurs(e); // on transfère l'objet de l'exception à une méthode
+    }
+    }); 
+    
   FS.main.map1.renderSync();
 
   if (FS.main.CompareCote == 1) {
