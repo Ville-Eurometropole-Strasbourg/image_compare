@@ -635,7 +635,7 @@ function Telecharger() {
       logoDURL = null;
     }
   }
-
+ 
   FS.main.map1.once("postcompose", function (e) {
     // télécharge en PNG la carte de gauche
     var canvas = e.context.canvas;
@@ -643,6 +643,16 @@ function Telecharger() {
     var sizeWidth = context.canvas.clientWidth;
     var sizeHeight = context.canvas.clientHeight;
 
+    definePNG(
+      canvas,
+      context,
+      attribG,
+      attribD,
+      sizeWidth,
+      sizeHeight,
+      "gauche"
+    );
+/*
     var imageG = new Image();
     var imageD = new Image();
 
@@ -680,9 +690,9 @@ function Telecharger() {
     }
 
       if (logoGURL != null && logoGURL != 0) {
-        imageG.onload = function () {
+
           if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
-                imageD.onload = function () {
+            
                 context.drawImage(
                   imageG,
                   0,
@@ -706,7 +716,7 @@ function Telecharger() {
                   sizeHeight,
                   "gauche"
                 );
-              };
+      
           } else {
             context.drawImage(
               imageG,
@@ -725,7 +735,7 @@ function Telecharger() {
               "gauche"
             );
           }
-        };
+
       } else {
         if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
             imageD.onload = function () {
@@ -758,7 +768,7 @@ function Telecharger() {
           );
         }
       }
-
+*/
     }); 
     
   FS.main.map1.renderSync();
@@ -774,7 +784,17 @@ function Telecharger() {
       window.resizeMapUpdateTimer = setTimeout(function () {
         var imageD = new Image();
         
-        if (logoDURL != null && logoDURL != 0) {
+        definePNG(
+          canvas,
+          context,
+          attribD,
+          attribD,
+          sizeWidth,
+          sizeHeight,
+          "droite"
+        );
+
+        /*if (logoDURL != null && logoDURL != 0) {
             fetch(logoDURL, { mode: 'no-cors' })
             .then((responseD) => responseD.blob())
             .then((blobD) => {
@@ -817,7 +837,7 @@ function Telecharger() {
             sizeHeight,
             "droite"
           );
-        }
+        }*/
       }, 50);
     });
     FS.main.map2.renderSync();
@@ -885,7 +905,7 @@ function Imprimer() {
   pdf.setFontSize(23);
   pdf.setTextColor(49, 69, 93);
   pdf.setFontType("bold");
-  pdf.text(102, 16, FS.main.langage[1][FS.main.langue]);
+  pdf.text(90, 16, FS.main.langage[1][FS.main.langue]);
   pdf.setFontSize(10);
   pdf.setTextColor(0);
   pdf.text(12, 24, FS.main.langage[29][FS.main.langue]);
@@ -953,6 +973,7 @@ function Imprimer() {
   if (attribD != null && attribD != 0) {
     pdf.text(150, 28, attribD);
   }
+/*
   if (logoGURL != null && logoGURL != 0) {
     let logoG = null;
     getDataUri(logoGURL, function (dataUri) {
@@ -967,6 +988,7 @@ function Imprimer() {
       pdf.addImage(logoD, "image/jpeg", 150, 30, (imgW * 10) / imgH, 10);
     });
   }
+*/
   function getDataUri(url, cb) {
     var image = new Image();
     image.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
