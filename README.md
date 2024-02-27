@@ -15,6 +15,8 @@ V 1.4: added a kiosk mode as URL parameter (K=1), the main js file is now separa
 
 V1.5: main parameters are now in a specific JSON file (param.json) and not in the javascript code. Start images and metadata URL are now in this parameter file (they were previously in donnees.json). Coordinates used in URL and permalink are now in geographic system and in decimal degrees (and not in Mercator coodinates anymore). Colors of the different elements are now only defined in the CSS file and no more in the main.js. Start images can be defined either by their order in the donnees.json file or by the internal name of the layer (used now in permalinks). Add a zoom to extent button (button with globe). Bug corrections.
 
+V1.6 : add base map, toponym and administrative divisions layers. These layers can be activated by the user using a new button at the top right of the interface. These layers are configured in main.js, they work throughout France.
+
 ---------------------------
 Composition of the project:
 ---------------------------

@@ -27,7 +27,10 @@ function initEvents() {
       $("#chercheAdresse").css("top", offset.top + 17);
       $("#annul_adresse").css("top", offset.top + 25);
       $("#listeAdresses").css("top", offset.top + 52);
-
+      $("#habillage").css("top", offset.top + 30);
+      $("#btnH").css("top", offset.top);
+      $("#texteAttributionH").css("top", offset.top + 5);
+      
       if (FS.main.CompareCote == 1) {
         var largeur = LargeurCarte() / 2;
         $("#carte1").css("width", largeur);
