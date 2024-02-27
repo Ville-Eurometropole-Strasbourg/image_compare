@@ -215,7 +215,7 @@ FS.main = {
 
     FS.main.baseMap = new ol.layer.Tile({ 
     source: new ol.source.XYZ({ 
-        url:'http://{1-4}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
+        url:'https://{1-4}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
     })
   })  
   FS.main.administrativeDivisionSource = new ol.source.TileWMS({
@@ -235,7 +235,7 @@ FS.main = {
 
   FS.main.toponym = new ol.layer.Tile({ 
     source: new ol.source.XYZ({ 
-        url:'http://{1-4}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
+        url:'https://{1-4}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
     })
   });
 
