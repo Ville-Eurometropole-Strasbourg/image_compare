@@ -561,7 +561,7 @@ a:visited {
 #habillage {
   top: 110px;
   right: 70px;
-  width: 220px;
+  width: 160px;
   position: fixed;
   z-index: 1000;
   background: rgba(49, 69, 93, 0.9);
@@ -572,6 +572,7 @@ a:visited {
   box-shadow: 5px 5px 6px var(--shadow-color);
   display: none;
 }
+
 .h {
   display: flex;
   align-items: center;
