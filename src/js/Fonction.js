@@ -643,120 +643,49 @@ function Telecharger() {
     var sizeWidth = context.canvas.clientWidth;
     var sizeHeight = context.canvas.clientHeight;
 
-    definePNG(
-      canvas,
-      context,
-      attribG,
-      attribD,
-      sizeWidth,
-      sizeHeight,
-      "gauche"
-    );
-/*
-    var imageG = new Image();
-    var imageD = new Image();
-
-    if (logoGURL != null && logoGURL != 0) {
-      fetch(logoGURL, { mode: 'no-cors' })
-        .then((responseG) => responseG.blob())
-        .then((blobG) => {
-          const imageUrlG = URL.createObjectURL(blobG);
-          imageG.src = imageUrlG;
-      })
-      .catch(error => {
-          if (error.name === 'TypeError' && error.message.includes('Network')) {
-            console.error('A network error occurred. This could be a CORS issue or a dropped connection. Error:', error);
-          } else {
-            console.error('An unknown error occurred:', error);
-          }
-        });
-    }
-
-    if (logoDURL != null && logoDURL != 0) {
-      fetch(logoDURL, { mode: 'no-cors' })
-      .then((responseD) => responseD.blob())
-      .then((blobD) => {
-        const imageUrlD = URL.createObjectURL(blobD);
-        imageD.src = imageUrlD;	
-		})
-		 .catch(error => {
-      
-        if (error.name === 'TypeError' && error.message.includes('Network')) {
-          console.error('A network error occurred. This could be a CORS issue or a dropped connection. Error:', error);
-        } else {
-          console.error('An unknown error occurred:', error);
-        }
-      });
-    }
-
-      if (logoGURL != null && logoGURL != 0) {
-
-          if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
-            
-                context.drawImage(
-                  imageG,
-                  0,
-                  sizeHeight - 66,
-                  (imageG.width * 50) / imageG.height,
-                  50
-                );
-                context.drawImage(
-                  imageD,
-                  sizeWidth / 2,
-                  sizeHeight - 66,
-                  (imageD.width * 50) / imageD.height,
-                  50
-                );
-                definePNG(
-                  canvas,
-                  context,
-                  attribG,
-                  attribD,
-                  sizeWidth,
-                  sizeHeight,
-                  "gauche"
-                );
-      
-          } else {
-            context.drawImage(
-              imageG,
-              0,
-              sizeHeight - 66,
-              (imageG.width * 50) / imageG.height,
-              50
-            );
-            definePNG(
-              canvas,
-              context,
-              attribG,
-              attribD,
-              sizeWidth,
-              sizeHeight,
-              "gauche"
-            );
-          }
-
-      } else {
+    /*if (logoGURL != null && logoGURL != 0) {
+      var imageG = new Image();
+      imageG.setAttribute("crossOrigin", "use-credentials"); //getting images from external domain
+      imageG.src = logoGURL;
+      imageG.onload = function () {
         if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
+          var imageD = new Image();
+          imageD.setAttribute("crossOrigin", "use-credentials"); //getting images from external domain
+
+            imageD.src = logoDURL;
             imageD.onload = function () {
-            context.drawImage(
-              imageD,
-              sizeWidth / 2,
-              sizeHeight - 66,
-              (imageD.width * 50) / imageD.height,
-              50
-            );
-            definePNG(
-              canvas,
-              context,
-              attribG,
-              attribD,
-              sizeWidth,
-              sizeHeight,
-              "gauche"
-            );
-          };
+              context.drawImage(
+                imageG,
+                0,
+                sizeHeight - 66,
+                (imageG.width * 50) / imageG.height,
+                50
+              );
+              context.drawImage(
+                imageD,
+                sizeWidth / 2,
+                sizeHeight - 66,
+                (imageD.width * 50) / imageD.height,
+                50
+              );
+              definePNG(
+                canvas,
+                context,
+                attribG,
+                attribD,
+                sizeWidth,
+                sizeHeight,
+                "gauche"
+              );
+            };
         } else {
+          context.drawImage(
+            imageG,
+            0,
+            sizeHeight - 66,
+            (imageG.width * 50) / imageG.height,
+            50
+          );
           definePNG(
             canvas,
             context,
@@ -767,9 +696,52 @@ function Telecharger() {
             "gauche"
           );
         }
+      };
+    } else {
+      if (logoDURL != null && logoDURL != 0 && FS.main.CompareCote != 1) {
+        var imageD = new Image();
+        imageD.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
+        imageD.src = logoDURL;
+        imageD.onload = function () {
+          context.drawImage(
+            imageD,
+            sizeWidth / 2,
+            sizeHeight - 66,
+            (imageD.width * 50) / imageD.height,
+            50
+          );
+          definePNG(
+            canvas,
+            context,
+            attribG,
+            attribD,
+            sizeWidth,
+            sizeHeight,
+            "gauche"
+          );
+        };
+      } else {
+        definePNG(
+          canvas,
+          context,
+          attribG,
+          attribD,
+          sizeWidth,
+          sizeHeight,
+          "gauche"
+        );
       }
-*/
-    }); 
+    }*/
+    definePNG(
+      canvas,
+      context,
+      attribG,
+      attribD,
+      sizeWidth,
+      sizeHeight,
+      "gauche"
+    );
+  }); 
     
   FS.main.map1.renderSync();
 
@@ -782,33 +754,10 @@ function Telecharger() {
       var sizeHeight = context.canvas.clientHeight;
 
       window.resizeMapUpdateTimer = setTimeout(function () {
-        var imageD = new Image();
-        
-        definePNG(
-          canvas,
-          context,
-          attribD,
-          attribD,
-          sizeWidth,
-          sizeHeight,
-          "droite"
-        );
-
         /*if (logoDURL != null && logoDURL != 0) {
-            fetch(logoDURL, { mode: 'no-cors' })
-            .then((responseD) => responseD.blob())
-            .then((blobD) => {
-              const imageUrlD = URL.createObjectURL(blobD);
-              imageD.src = imageUrlD;	
-          })
-           .catch(error => {            
-              if (error.name === 'TypeError' && error.message.includes('Network')) {
-                console.error('A network error occurred. This could be a CORS issue or a dropped connection. Error:', error);
-              } else {
-                console.error('An unknown error occurred:', error);
-              }
-            });
-
+          var imageD = new Image();
+          imageD.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
+          imageD.src = logoDURL;
           imageD.onload = function () {
             context.drawImage(
               imageD,
@@ -838,6 +787,15 @@ function Telecharger() {
             "droite"
           );
         }*/
+        definePNG(
+          canvas,
+          context,
+          attribD,
+          attribD,
+          sizeWidth,
+          sizeHeight,
+          "droite"
+        );
       }, 50);
     });
     FS.main.map2.renderSync();
@@ -853,7 +811,6 @@ function Telecharger() {
     carte
   ) 
   {
-
     context.font = "10pt Calibri";
     context.fillStyle = "#ffffff";
     if (attribG != null && attribG != 0) {
@@ -973,7 +930,7 @@ function Imprimer() {
   if (attribD != null && attribD != 0) {
     pdf.text(150, 28, attribD);
   }
-/*
+
   if (logoGURL != null && logoGURL != 0) {
     let logoG = null;
     getDataUri(logoGURL, function (dataUri) {
@@ -988,7 +945,7 @@ function Imprimer() {
       pdf.addImage(logoD, "image/jpeg", 150, 30, (imgW * 10) / imgH, 10);
     });
   }
-*/
+
   function getDataUri(url, cb) {
     var image = new Image();
     image.setAttribute("crossOrigin", "Anonymous"); //getting images from external domain
