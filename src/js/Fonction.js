@@ -643,14 +643,14 @@ function Telecharger() {
     var sizeWidth = context.canvas.clientWidth;
     var sizeHeight = context.canvas.clientHeight;
 
-    fetch(logoGURL)
+    fetch(logoGURL, { mode: 'no-cors' })
     .then((response) => response.blob())
     .then((blob) => {
       const imageUrlG = URL.createObjectURL(blob);
       var imageG = new Image();
       imageG.src = imageUrlG;
       
-      fetch(logoDURL)
+      fetch(logoDURL, { mode: 'no-cors' })
       .then((responseD) => responseD.blob())
       .then((blobD) => {
         const imageUrlD = URL.createObjectURL(blobD);
