@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<!-- image_compare v1.5 -->
+<!-- image_compare v1.6 -->
 
 <html>
 
@@ -90,6 +90,13 @@
 			<div id='ie_avertissement'></div>	
 			<div id="aide_kiosque"></div>			
 			<div id='apercu'></div>
+			<div id="btnH"><img id="btnHabillage" src="img/habillage.png" draggable="false" alt="habillage"/></div>
+			<div id='habillage'>
+				<div class="h" id="baseMapContainer"><input type="checkbox" id="baseMap" name="baseMap" checked /><label id="baseMapLabel" for="baseMap">Fond de carte</label></div>
+				<div class="h" id="administrativeDivisionContainer"><input type="checkbox" id="administrativeDivision" name="administrativeDivision" checked /><label id="administrativeDivisionLabel" for="administrativeDivision">D&eacute;coupages administratifs</label></div>
+				<div class="h" id="toponymContainer"><input type="checkbox" id="toponym" name="toponym" checked /><label id="toponymLabel" for="toponym">Toponymes</label></div>
+			</div>
+			<div id="texteAttributionH"></div>
 			<div id="toolbar">	
 				<div id="btnAide"><img  class="imgChoix" id="imgbtnAide" src="img/aide.png" draggable="false" alt="aide"/></div>	
 				<div class="btnChoix kiosk"><a target="_self" href="http://www.sig.strasbourg.eu"><img  class="imgChoix" id="btnMaison" src="img/maison.png" draggable="false" alt="maison"/></a>

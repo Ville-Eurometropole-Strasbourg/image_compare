@@ -1,4 +1,4 @@
-//image_compare version 1.5
+//image_compare version 1.6
 
 //Fichier des fonctions
 
@@ -121,6 +121,9 @@ function changeLangage(langue, init) {
   $("#avec").html(FS.main.langage[4][langue]);
   $("#adresse").attr("placeholder", FS.main.langage[5][langue]);
   $("#adresse").attr("alt", FS.main.langage[6][langue]);
+  $("#baseMapLabel").html(FS.main.langage[45][langue]);
+  $("#administrativeDivisionLabel").html(FS.main.langage[46][langue]);
+  $("#toponymLabel").html(FS.main.langage[47][langue]);
   $("#labelGeo").html(FS.main.langage[7][langue]);
   $("#labelRGF").html(FS.main.langage[8][langue]);
   $("#imprimerPatientez").html(
@@ -508,6 +511,19 @@ function Coordonnees() {
     FS.main.map2.removeControl(FS.main.map1.getControls().getArray()[3]);
     FS.main.map2.removeControl(FS.main.map1.getControls().getArray()[3]);
     FS.main.ModeCoord = 0;
+  }
+}
+
+function Habillage() {
+  if (FS.main.ModeHabillage != 1) {
+    // mettre en place l'interface de cet outil
+    $("#habillage").show(800);
+    FS.main.ModeHabillage = 1;
+  } else {
+    // si cette méthode était déjà active, ôter l'interface de cette méthode
+    btnHabillage.style.background = "transparent";
+    $("#habillage").hide(800);
+    FS.main.ModeHabillage = 0;
   }
 }
 
@@ -1401,9 +1417,25 @@ function ChoixImage() {
   FS.main.map2.getLayers().forEach(function (l) {
     l.setVisible(false);
   });
-  FS.main.vectorLayer.setVisible(true);
 
-  // Mise en avant des images choisies à gauche et droite & de la couche vectorielles de meseure
+  // gestion de le couche de mesure et des couches d'habillage
+  FS.main.vectorLayer.setVisible(true);
+  if ($("#baseMap").is(':checked') == true) {FS.main.baseMap.setVisible(true)} else {FS.main.baseMap.setVisible(false)};
+  if ($("#administrativeDivision").is(':checked') == true) {FS.main.administrativeDivision.setVisible(true)} else {FS.main.administrativeDivision.setVisible(false)};
+  if ($("#toponym").is(':checked') == true) {FS.main.toponym.setVisible(true)} else {FS.main.toponym.setVisible(false)};
+  $("#texteAttributionH").css("visibility", "hidden");
+  if ($("#baseMap").is(':checked') == true || $("#toponym").is(':checked') == true) {
+    $("#texteAttributionH").html('<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO');
+    $("#texteAttributionH").css("visibility", "visible");
+  } ;
+  if ($("#administrativeDivision").is(':checked') == true) {
+    $("#texteAttributionH").css("visibility", "visible");
+    if ($("#baseMap").is(':checked') == true || $("#toponym").is(':checked') == true) {$("#texteAttributionH").html('<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO / <a href="https://www.ign.fr/" target="_blank">IGN</a>')}
+    else {$("#texteAttributionH").html('<a href="https://www.ign.fr/" target="_blank">IGN</a>')} ;
+  };
+
+
+  // mise en avant des images choisies à gauche et droite & de la couche vectorielles de meseure
   var choixImageDroite = $("#ImageDroite").val();
   if (FS.main.CompareCote == 1 || FS.main.CompareSwitcher == 1) {
     choixImageDroite = choixImageDroite + "_BIS";
@@ -1444,7 +1476,11 @@ function ChoixImage() {
     });
   }
 
-  FS.main.vectorLayer.setZIndex(1020);
+  FS.main.vectorLayer.setZIndex(1100);
+  FS.main.baseMap.setZIndex(999);
+  FS.main.administrativeDivision.setZIndex(1050);
+  FS.main.toponym.setZIndex(1051);
+
 
   // rendre les couches sélectionnées visibles
   ImageGauche.setVisible(true);

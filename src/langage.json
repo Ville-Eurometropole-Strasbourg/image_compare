@@ -44,5 +44,8 @@
     ["Envoyer par e-mail","Send by e-mail","per E-Mail senden","Enviar por correo electrónico"],
     ["Annuler","Cancel","Stornieren","Cancelar"],
     ["Comparaison d'images historiques de Strasbourg","Comparison of historical images of Strasbourg","Vergleich historischer Bilder von Straßburg","Comparación de imágenes históricas de Estrasburgo"],
+    ["Fond de carte","Base map","Basiskarte","Mapa base"],
+    ["Découpages administratifs","Administrative divisions","Verwaltungsgliederung","Divisiones administrativas"],
+    ["Toponymes","Toponyms","Toponyme","Topónimos"],
     ["default",1]
 ]

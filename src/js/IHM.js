@@ -1,4 +1,4 @@
-//image_compare version 1.5
+//image_compare version 1.6
 
 /**--------------------------------------------------------------
 	Fonction d'initialisation des évènements
@@ -20,7 +20,7 @@ function initEvents() {
       var hauteur = HauteurCarte();
       $("#carte1").css("height", hauteur);
       $("#carte2").css("height", hauteur);
-      $("#toolbar").css("height", htoolbar);
+      $("#toolbar").css("height", hauteur);
       FS.main.map1.updateSize();
       FS.main.map2.updateSize();
       var offset = $("#contenu").offset();
@@ -36,6 +36,8 @@ function initEvents() {
         FS.main.map2.updateSize();
       }
     }, 10);
+    $('#contenuTD').height("100%");
+    $('#pied').height("20px");
   });
 }
 
@@ -569,6 +571,47 @@ function initControls() {
       }
     }
   );
+
+  $("#btnHabillage").on("click", function (e) {
+    Habillage();
+    $(this).css("box-shadow", "none");
+  });
+  $("#btnHabillage").hover(
+    function () {
+      $(this).css({
+        "background-color": "var(--highlight-color)",
+        "box-shadow":
+          "2px 2px 10px var(--highlight-color-alpha1), -2px -2px 10px var(--highlight-color-alpha1)",
+      });
+    },
+    function () {
+        $(this).css({
+          "background-color": "transparent",
+          "box-shadow": "none",
+        });
+    }
+  );
+
+  $("#baseMap").on("click", function (e) {
+    ChoixImage();
+    $(this).css("box-shadow", "none");
+  });
+  $("#administrativeDivision").on("click", function (e) {
+    ChoixImage();
+    $(this).css("box-shadow", "none");
+  });
+  $("#toponym").on("click", function (e) {
+    ChoixImage();
+    $(this).css("box-shadow", "none");
+  });
+  
+  if (FS.main.baseMapC == 9) {$("#baseMapContainer").remove()};
+  if (FS.main.administrativeDivisionC == 9) {$("#administrativeDivisionContainer").remove()};
+  if (FS.main.toponymC == 9) {$("#toponymContainer").remove()};
+
+  if (FS.main.baseMapC == 1) {$("#baseMap").prop( "checked", true )} else {$("#baseMap").prop( "checked", false )}
+  if (FS.main.administrativeDivisionC == 1) {$("#administrativeDivision").prop( "checked", true )} else {$("#administrativeDivision").prop( "checked", false )}
+  if (FS.main.toponymC == 1) {$("#toponym").prop( "checked", true )} else {$("#toponym").prop( "checked", false )}
 
   $("#btnTelecharger").on("click", function (e) {
     if (chargementCap == 1) {

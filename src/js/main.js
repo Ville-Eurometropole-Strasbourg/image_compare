@@ -1,4 +1,4 @@
-//image_compare version 1.5
+//image_compare version 1.6
 
 var FS = FS || {}; //utilise l'objet FS s'il existe ou (||) créé un nouvel objet {}
 var capabilities = new Array();
@@ -6,9 +6,12 @@ var chargementCap = 0;
 var wtoolbar = 62;
 var htoolbar;
 
+
+
 FS.main = {
+
   init: function (tabdata, langageData, paramData) {
-    console.log("init");
+    //console.log("init");
     /**--------------------------------------------------------------
 	Défintion des données à afficher, des paramètres et mise en place 
 ----------------------------------------------------------------*/
@@ -78,6 +81,15 @@ FS.main = {
       }
       if (FS.main.param[i][0] == "startImage2") {
         FS.main.startImage2 = FS.main.param[i][1];
+      }
+      if (FS.main.param[i][0] == "baseMap") {
+        FS.main.baseMapC = FS.main.param[i][1];
+      }
+      if (FS.main.param[i][0] == "administrativeDivision") {
+        FS.main.administrativeDivisionC = FS.main.param[i][1];
+      }
+      if (FS.main.param[i][0] == "toponym") {
+        FS.main.toponymC = FS.main.param[i][1];
       }
     }
 
@@ -186,16 +198,47 @@ FS.main = {
         }),
         stroke: new ol.style.Stroke({
           color: FS.main.active_color,
-          width: 2,
+          width: 2
         }),
         image: new ol.style.Circle({
           radius: 7,
           fill: new ol.style.Fill({
-            color: FS.main.active_color,
+          color: FS.main.active_color,
           }),
         }),
       }),
     });
+
+    /**--------------------------------------------------------------
+	Couches d'habillage
+---------------------------------------------------------------*/
+
+    FS.main.baseMap = new ol.layer.Tile({ 
+    source: new ol.source.XYZ({ 
+        url:'http://{1-4}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
+    })
+  })  
+  FS.main.administrativeDivisionSource = new ol.source.TileWMS({
+    url: 'https://wxs.ign.fr/administratif/geoportail/r/wms',
+    params: {
+      LAYERS: 'LIMITES_ADMINISTRATIVES_EXPRESS.LATEST',
+      TILED: true,
+    },
+    crossOrigin: "anonymous",
+  });
+  FS.main.administrativeDivision = new ol.layer.Tile({
+    source: FS.main.administrativeDivisionSource,
+    opacity: 1,
+    name: "administrativeDivision",
+    visible: true,
+  });
+
+  FS.main.toponym = new ol.layer.Tile({ 
+    source: new ol.source.XYZ({ 
+        url:'http://{1-4}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
+    })
+  });
+
 
     /**-------------------------------------------------------------------
 	Paramétrage de la vue et des cartes (gauche = map1, droite = map2) 
@@ -262,12 +305,18 @@ FS.main = {
       layers1[i] = couches[i];
     }
     layers1[layers1.length] = FS.main.vectorLayer;
+    layers1[layers1.length] = FS.main.baseMap;
+    layers1[layers1.length] = FS.main.administrativeDivision;
+    layers1[layers1.length] = FS.main.toponym;
 
     var layers2 = [];
     for (var i = 0; i < FS.main.donnees.length - 1; i++) {
       layers2[i] = couches[i + FS.main.donnees.length - 1];
     }
     layers2[layers2.length] = FS.main.vectorLayer;
+    layers2[layers2.length] = FS.main.baseMap;
+    layers2[layers2.length] = FS.main.administrativeDivision;
+    layers2[layers2.length] = FS.main.toponym;
 
     FS.main.map1 = new ol.Map({
       target: "carte1", // cible de la carte
