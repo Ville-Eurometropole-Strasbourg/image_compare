@@ -213,9 +213,10 @@ FS.main = {
 	Couches d'habillage
 ---------------------------------------------------------------*/
 
-    FS.main.baseMap = new ol.layer.Tile({ 
+  FS.main.baseMap = new ol.layer.Tile({ 
     source: new ol.source.XYZ({ 
         url:'https://{1-4}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
+        crossOrigin: "anonymous"
     })
   })  
   FS.main.administrativeDivisionSource = new ol.source.TileWMS({
@@ -236,6 +237,7 @@ FS.main = {
   FS.main.toponym = new ol.layer.Tile({ 
     source: new ol.source.XYZ({ 
         url:'https://{1-4}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
+        crossOrigin: "anonymous"
     })
   });
 
