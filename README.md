@@ -2,7 +2,7 @@
 
 ![](src/img/ortho_histo.png)
 
-Comparison of images with openlayers 4
+Comparison of images with OpenLayers 4
 
 -------------
 What's new ?
