@@ -9,6 +9,18 @@
     "metadata link : 0 = none, wms = wms stream metadata link or a string containaing the URL of the metadata"
   ],
   [
+    "EMS_Plan_relief_1725",
+    "https://www.datagrandest.fr/geoserver/ems/wms",
+    "EMS_plan_relief_1725",
+    0,
+    0,
+    "1725 - Plan relief",
+    "1750 - Relief plan",
+    "1750 - Stadtmodell",
+    "1750 - Plano en relieve",
+    0
+  ],
+  [
     "EMS_Carte_historique_Strasbourg_1750",
     "https://www.datagrandest.fr/geoserver/ems/wms",
     "EMS_Carte_historique_Strasbourg_1750",
@@ -517,7 +529,7 @@
   ],
   [
     "Pleiades_2022",
-    "https://wxs.ign.fr/satellite/geoportail/r/wms",
+    "https://data.geopf.fr/wms-r",
     "ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2022",
     0,
     ["© IGN - CNES, Distribution AIRBUS DS", ""],
