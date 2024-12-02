@@ -18,7 +18,7 @@
     "1750 - Relief plan",
     "1750 - Stadtmodell",
     "1750 - Plano en relieve",
-    0
+    "https://s3.eu-west-2.wasabisys.com/ems-sgct-photomaillage/ODACIT/PLAN_RELIEF_1725/Metadonnee_planrelief1725_Ortho.pdf"
   ],
   [
     "EMS_Carte_historique_Strasbourg_1750",
@@ -406,7 +406,7 @@
   ],
   [
     "Pleiades_2014",
-    "https://wxs.ign.fr/satellite/geoportail/r/wms",
+    "https://data.geopf.fr/wms-r",
     "ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2014",
     0,
     ["© IGN - CNES, Distribution AIRBUS DS", ""],
@@ -430,7 +430,7 @@
   ],
   [
     "Pleiades_2016",
-    "https://wxs.ign.fr/satellite/geoportail/r/wms",
+    "https://data.geopf.fr/wms-r",
     "ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2016",
     0,
     ["© IGN - CNES, Distribution AIRBUS DS", ""],
@@ -466,7 +466,7 @@
   ],
   [
     "Pleiades_2017",
-    "https://wxs.ign.fr/satellite/geoportail/r/wms",
+    "https://data.geopf.fr/wms-r",
     "ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2017",
     0,
     ["© IGN - CNES, Distribution AIRBUS DS", ""],
