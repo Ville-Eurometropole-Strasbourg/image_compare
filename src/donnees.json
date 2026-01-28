@@ -565,17 +565,5 @@
     "Aktuelle - Karte",
     "Actual - Mapa",
     "http://www.sig.strasbourg.eu/metadonnees/cswreader/last/index.html?config=config%2Fconfig.json&lang=undefined&view=view&csw=http:%2F%2Fwww.sig.strasbourg.eu%2Fmetadonnees%2Fcswserver%2Flast%2Fcsw%2Fressources.php%3FVERSION%3D2.0.2&csw_list=config%2Fcsw_url.json&md=fr_strasbourg.eu_2013_07_03_64&oldView=grid&header=1&footer=1&constraint_type=Abstract&constraint=topo"
-  ],
-  [
-    "Cadastre",
-    "https://www.datagrandest.fr/geoserver/ems/wms",
-    "EMS_plan_cadastral",
-    1,
-    "wms",
-    "Actuel - Plan parcellaire",
-    "Current - Cadastral parcels map",
-    "Aktuell - Flurstücksplan",
-    "Actual - Mapa de las parcelas catastrales ",
-    "wms"
   ]
 ]
