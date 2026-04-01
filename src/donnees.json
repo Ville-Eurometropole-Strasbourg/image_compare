@@ -552,6 +552,18 @@
     "wms"
   ],
   [
+    "Cadastre",
+    "https://data.geopf.fr/wms-r",
+    "CADASTRALPARCELS.PARCELLAIRE_EXPRESS",
+    0,
+    ["IGN - DGFiP", ""],
+    "Actuel - Plan parcellaire",
+    "Current - Cadastral parcels map",
+    "Aktuell - Flurstücksplan",
+    "Actual - Mapa de las parcelas catastrales",
+    "wms"
+  ],
+  [
     "Fond_carte_EmS",
     "XYZ",
     "http://wgs-users.s3.amazonaws.com/cus/fonds/ems_gris/{z}/{x}/{y}.png",
