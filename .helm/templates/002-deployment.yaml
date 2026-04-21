@@ -28,13 +28,13 @@ spec:
         readinessProbe:
           httpGet:
             path: /
-              port: {{ .Values.app.port }}
+            port: {{ .Values.app.port }}
           initialDelaySeconds: 0
           periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /
-              port: {{ .Values.app.port }}
+            port: {{ .Values.app.port }}
           initialDelaySeconds: 0
           periodSeconds: 10
         resources:
