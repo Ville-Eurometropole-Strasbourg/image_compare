@@ -27,6 +27,18 @@ spec:
           value: https://{{ .Values.env_url }}
         resources:
           {{- toYaml .Values.app.resources | nindent 12 }}
+        readinessProbe:
+          httpGet:
+            path: /
+              port: {{ .Values.app.port }}
+          initialDelaySeconds: 0
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.app.port }}
+          initialDelaySeconds: 0
+          periodSeconds: 10
 ---
 apiVersion: v1
 kind: Service
