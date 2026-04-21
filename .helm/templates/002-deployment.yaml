@@ -25,6 +25,18 @@ spec:
         env:
         - name: url
           value: https://{{ .Values.env_url }}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.app.port }}
+          initialDelaySeconds: 0
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.app.port }}
+          initialDelaySeconds: 0
+          periodSeconds: 10
         resources:
           {{- toYaml .Values.app.resources | nindent 12 }}
 ---
