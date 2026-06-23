@@ -5,7 +5,7 @@ metadata:
     app: {{ .Values.werf.name }}-{{ .Values.werf.env }}
   name: {{ .Values.werf.name }}-{{ .Values.werf.env }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.app.replicas }}
   selector:
     matchLabels:
       app: {{ .Values.werf.name }}-{{ .Values.werf.env }}
@@ -16,6 +16,7 @@ spec:
     spec:
       imagePullSecrets:
         - name: registry-secret
+      restartPolicy: Always
       containers:
       - image: {{ .Values.werf.image.appli }}
         name: {{ .Values.werf.name }}
