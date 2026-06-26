@@ -1,7 +1,7 @@
 app:
   port: 8080
   root: /app
-  replicas: 2
+  replicas: 5
   resources:
     limits:
       memory: 100Mi
