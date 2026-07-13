@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html",
-            "file": "c:\\Gitlab\\imagecompare\\src\\index.html",
+            "file": "c:\\Users\\992607\\Mes Documents (local)\\Gitlab\\imagecompare\\src\\index.html",
             "runtimeArgs": ["--disable-web-security"]
         }
     ]
