@@ -17,7 +17,7 @@ function attribution(nom) {
           attributions[0] = null;
           attributions[1] = null;
           var title1 = $(this).children("Attribution").children("Title").text();
-          if (title1.length > 2 || title1 != "undefined") {
+          if (title1 != undefined) {
             attributions[0] = title1;
           } else {
             attributions[0] = null;
@@ -27,11 +27,13 @@ function attribution(nom) {
             .children("LogoURL")
             .children("OnlineResource")
             .attr("xlink:href");
-          if (logo1.match(/\.(jpeg|jpg|gif|png)$/) != null) {
-            attributions[1] = logo1;
-          } else {
+          if(logo1 != undefined) {
+            if (logo1.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+              attributions[1] = logo1;
+            } else {
             attributions[1] = null;
-          }
+            }
+        }
         }
       });
   }
@@ -49,7 +51,7 @@ function definirMetadonnees(nom) {
           $(this)
             .children("MetadataURL")
             .each(function () {
-              if ($(this).attr("type") == "ISO19115:2003") {
+              if ($(this).attr("type") == "ISO19115:2003" || $(this).attr("type") == "TC211") {
                 var meta1 = $(this)
                   .children("OnlineResource")
                   .attr("xlink:href");
