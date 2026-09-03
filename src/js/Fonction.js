@@ -1454,7 +1454,7 @@ function ChoixImage() {
   } ;
   if ($("#administrativeDivision").is(':checked') == true) {
     $("#texteAttributionH").css("visibility", "visible");
-    if ($("#baseMap").is(':checked') == true || $("#toponym").is(':checked') == true) {$("#texteAttributionH").html('<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO / <a href="https://www.ign.fr/" target="_blank">IGN</a>')}
+    if ($("#baseMap").is(':checked') == true || $("#toponym").is(':checked') == true) {$("#texteAttributionH").html('<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; / <a href="https://www.ign.fr/" target="_blank">IGN</a>')}
     else {$("#texteAttributionH").html('<a href="https://www.ign.fr/" target="_blank">IGN</a>')} ;
   };
 
