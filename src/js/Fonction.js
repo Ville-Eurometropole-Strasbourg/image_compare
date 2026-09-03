@@ -1449,12 +1449,12 @@ function ChoixImage() {
   if ($("#toponym").is(':checked') == true) {FS.main.toponym.setVisible(true)} else {FS.main.toponym.setVisible(false)};
   $("#texteAttributionH").css("visibility", "hidden");
   if ($("#baseMap").is(':checked') == true || $("#toponym").is(':checked') == true) {
-    $("#texteAttributionH").html('<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO');
+    $("#texteAttributionH").html('<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy;');
     $("#texteAttributionH").css("visibility", "visible");
   } ;
   if ($("#administrativeDivision").is(':checked') == true) {
     $("#texteAttributionH").css("visibility", "visible");
-    if ($("#baseMap").is(':checked') == true || $("#toponym").is(':checked') == true) {$("#texteAttributionH").html('<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO / <a href="https://www.ign.fr/" target="_blank">IGN</a>')}
+    if ($("#baseMap").is(':checked') == true || $("#toponym").is(':checked') == true) {$("#texteAttributionH").html('<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; / <a href="https://www.ign.fr/" target="_blank">IGN</a>')}
     else {$("#texteAttributionH").html('<a href="https://www.ign.fr/" target="_blank">IGN</a>')} ;
   };
 

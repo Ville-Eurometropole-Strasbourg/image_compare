@@ -209,21 +209,29 @@ FS.main = {
       }),
     });
 
-    /**--------------------------------------------------------------
+  /**--------------------------------------------------------------
 	Couches d'habillage
----------------------------------------------------------------*/
-
-  FS.main.baseMap = new ol.layer.Tile({ 
-    source: new ol.source.XYZ({ 
-        url:'https://{1-4}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
-        crossOrigin: "anonymous"
-    })
-  })  
-  FS.main.administrativeDivisionSource = new ol.source.TileWMS({
-    url: 'https://wxs.ign.fr/administratif/geoportail/r/wms',
+  ---------------------------------------------------------------*/
+  
+  FS.main.baseMapSource = new ol.source.TileWMS({
+    url: ' https://osm.datagrandest.fr/mapcache/wms',
     params: {
-      LAYERS: 'LIMITES_ADMINISTRATIVES_EXPRESS.LATEST',
+      LAYERS: 'faded',
       TILED: true,
+    },
+    crossOrigin: "anonymous",
+  });
+  FS.main.baseMap = new ol.layer.Tile({
+    source: FS.main.baseMapSource,
+    opacity: 1,
+    name: "basemap",
+    visible: true,
+  });
+
+  FS.main.administrativeDivisionSource = new ol.source.TileWMS({
+    url: 'https://data.geopf.fr/wms-r/wms',
+    params: {
+      LAYERS: 'ADMINEXPRESS-COG-CARTO.LATEST'
     },
     crossOrigin: "anonymous",
   });
@@ -234,11 +242,19 @@ FS.main = {
     visible: true,
   });
 
-  FS.main.toponym = new ol.layer.Tile({ 
-    source: new ol.source.XYZ({ 
-        url:'https://{1-4}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
-        crossOrigin: "anonymous"
-    })
+  FS.main.toponymSource = new ol.source.TileWMS({
+    url: ' https://osm.datagrandest.fr/mapcache/wms',
+    params: {
+      LAYERS: 'overlay',
+      TILED: true,
+    },
+    crossOrigin: "anonymous",
+  });
+  FS.main.toponym = new ol.layer.Tile({
+    source: FS.main.toponymSource,
+    opacity: 1,
+    name: "toponym",
+    visible: true,
   });
 
 
